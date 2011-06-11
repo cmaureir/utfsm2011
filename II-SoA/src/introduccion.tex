@@ -1,0 +1,82 @@
+En el campo de la astrofísica,
+han surgido distintos problemas que debido a la complejidad
+o intensidad del cálculo, han sido el objetivo de muchos
+científicos e investigadores a la hora de realizar
+aplicaciones en sistemas computacionales de alto desempeño.
+
+Uno de dichos problemas se basa en los principios
+fundamentales del movimiento particular, relacionándolo con
+la fuerza gravitacional, nos referimos al problema de \emph{n-cuerpos}.
+
+% definicion del problema
+El problema de los \emph{n-cuerpos} es el problema de poder
+predecir el movimiento de un conjunto determinado de cuerpos celestes,
+los cuales interactuarán unos con otros debido a la fuerza
+gravitacional.
+
+Cada objeto celeste tendrá una determinada \emph{masa} $(m)$
+y una determinada ubicación en el espacio
+tridimensional $(x,y,z)$, además de tener una velocidad inicial
+determinada en cada dirección $(v_{x},v_{y},v_{z})$ y finalmente
+tendrá una cierta aceleración inicial de cero $(a_{x},a_{y},a_{z})$.
+Cabe señalar que tanto la \emph{posición}, la \emph{velocidad} y la \emph{aceleración},
+serán actualizadas dependiendo de la interacción con otros cuerpos.
+
+% ejemplo informal
+Un ejemplo clásico de lo que es el problema de \emph{n-cuerpos},
+es el movimiento de los planetas en nuestro sistema solar,
+el cual se vé afectado tanto de las propiedades del Sol,
+como de todos los otros cuerpos que se encuntran entre sus órbitas.
+
+% interes del problema
+El factor de interés del problema de \emph{n-cuerpos}
+es que los algoritmos numéricos que se desarrollan para resolver
+la dinámica de este problema, puede aplicarse no sólo en el área de la astrofísica,
+con campos como \emph{Celestial mechanics}, \emph{Dense stellar systems},
+\emph{Sphere of influence of a massive BH}, y \emph{Galaxy dynamics and cosmology},
+si no que también es ampliamente utilizado en el área de dinámica de fluídos,
+el cual por  ejemplo puede verse reflejado en el trabajo de Gingold et al.~\cite{gingold}
+donde se toma como objetivo principal un método de resolución de modelos físicos,
+mas que la interacción misma de las particulas.
+
+Otra área importante dentro de la dinámica de fluidos son los \emph{Vortex Methods},
+los cuales son una técnica para realizar la simulación de distintos flujos turbulentos
+de un fluído en particular. Sin embargo, las aplicaciones no se quedan sólo en la teoría
+pues por ejemplo, se han realizado simulaciones de humo en tiempo real
+para utilizarlo en el desarrollo de video juegos~\cite{gourlay}.
+
+% 	¿Por qué es dificil?
+% 		¿Es NP-completo?
+% 		Debilidades de lo existente
+% 		Costo versus calidad de las soluciones
+
+La resolución del problema de los \emph{n-cuerpos} consta de tres
+aspectos claves, que determinarán la dificultad del cálculo.
+
+Primero se requiere un escenario inicial para dicho problema,
+por lo cual existen distintas alternativas, las cuales pueden ser
+generar las posiciones aleatoreamente, que de por sí conlleva un problema,
+o ocupar modelos existentes para generar una situación inicial,
+como \emph{Plummer model} \red{CITE}.
+
+Otro aspecto importante es que como debemos trabajar con la interacción
+entre los cuerpos, se debe utilizar un método para integrar las ecuaciones
+del movimiento, para así poder actualizar tanto \emph{posición}, \emph{velocidad}
+y \emph{aceleración}. 
+
+En este punto es donde se han utilizado variados métodos ampliamente conocidos,
+como por ejemplo \emph{Forward and Backward Euler}, los cuales no son recomendados
+debido a su poca precisión. Desde ese punto que otro métodos han ido mejorando
+el funcionamiento de las ecuaciones de movimiento, como \emph{Leapfrog integration}.
+Finalmente los métodos más recomendados son \emph{Runge Kutta} y \emph{Two step Adams-Bashworth},
+los cuales poseen una precisión mucho mejor que los métodos anteriores, pero son
+más caros a nivel de cálculo.
+
+Finalmente, el punto más importante para el presente problema es el cálculo
+de la fuerza entre las particulas, tema principal del presente trabajo,
+ya que si consideramos que la fuerza ejercida sobre una particula está determinada
+por todo el resto de particulas en un sistema determinado, el orden del algoritmo
+crecerá en forma cuadrática al aumentar la cantidad de particulas,
+tema por el cual variados investigadores han realizado técnicas para disminuir
+el orden de $O(n^2)$ que posee en su versión inicial, ocupando un enfoque
+\emph{Particle-Particle}.

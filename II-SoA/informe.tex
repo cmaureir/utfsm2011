@@ -1,0 +1,50 @@
+\documentclass[letter, 10pt]{IEEEtran}
+%\documentclass[letter, 10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{color}
+
+%\usepackage[top=3cm,bottom=3cm,left=3.5cm,right=3.5cm,footskip=1.5cm,headheight=1.5cm,headsep=.5cm,textheight=3cm]{geometry}
+
+\definecolor{red}{rgb}{1,0,0}
+\definecolor{green}{rgb}{0,1,0}
+\definecolor{blue}{rgb}{0,0,1}
+\newcommand{\blue}{\textcolor{blue}}
+\newcommand{\red}{\textcolor{red}}
+\newcommand{\green}{\textcolor{green}}
+
+
+\begin{document}
+\bibliographystyle{plain}
+\pagestyle{empty}
+
+\title{Introducción a la Investigación\\ \begin{Large}Estado del Arte: ``Problema de los n-cuerpos''\end{Large}}
+\author{Cristián D. Maureira Fredes\\\url{cmaureir@csrg.cl}}
+\date{\today}
+
+\maketitle
+\begin{abstract}
+Lorem ipsum\\
+{\bf Keywords: } ala, lele
+\end{abstract}
+
+\section{Introducción}
+\label{sec:introduccion}
+\input{src/introduccion}
+
+\section{Estado del arte}
+\label{sec:estado_arte}
+\input{src/estado_arte}
+
+\section{Conclusiones}
+\label{sec:conclusiones}
+\input{src/conclusiones}
+
+\section{Bibliografía}
+\bibliography{informe}
+\end{document} 
