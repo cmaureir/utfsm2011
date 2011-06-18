@@ -10,7 +10,7 @@
 El cálculo de la fuerza en su forma general está dado por,
 $$f_{ij} =G \cdot \frac{m_i \cdot m_j}{||r_{ij}||^{2}} \cdot \frac{r_{ij}}{||r_ij||}$$,
 donde las posiciones iniciales son $x_i$,
-las velocidaddes son $v_i$,
+las velocidades son $v_i$,
 teniendo a $i$, entre los valores, $1 \leq i \leq N$,
 la masa de los cuerpos $i$ y $j$ determinada por $m_i$ y $m_j$,
 siendo $r_{ij} = (x_j - x_i )$ vector de distancia entre los cuerpos $i$ y $j$
@@ -18,14 +18,14 @@ y finalmente $G$, constante gravitacional. ($6,67428 \times 10^{-11} m^{3} kg^{-
 
 % Explicación de métodos para calculo fuerza
 
-\subsection{Particle-Particle}
+\subsection{Particle-Particle (PP)}
 
 El presente enfoque es la forma más simple de poder abordar
 la tarea del calculo de la fuerza que ejercen los cuerpos sobre otros.
 
 A grandes rasgos, el método consiste en:
 \begin{itemize}
-	\item Acumular las fuerzas sobre una particula determinada (utilizando fórmula anteriormente señalada).
+	\item Acumular las fuerzas sobre una partícula determinada (utilizando fórmula anteriormente señalada).
 	\item Integrar las ecuaciones de movimiento.
 	\item Actualizar el contador.
 	\item Repetir el proceso.
@@ -42,13 +42,16 @@ podemos darnos cuenta de que el proceso es de orden $O(n^{2})$,
 lo que para cualquier algoritmo, no es un escenario
 deseable.
 
-%Harvey Gould and Jan Tobochnik, An Introduction to Computer Simulation Methods, Parts 1 and 2, Addison Wesley, 1988
-%Alejandro Garcia, Numerical Methods for Physics, Prentice-Hall, 1994.
+Al ser esta la solución inicial, completamente teórica,
+sin ningún tipo de mejora, cualquier texto que haga
+referencia a métodos de integración será útil,
+pero también es conveniente recurrir a referencias
+de simulación, como lo es el trabajo de Gould y Tabochnik~\red{methods}.
 
-\subsection{Particle-Mesh}
+\subsection{Particle-Mesh (PM)}
 
 Este método genera una malla en todo el espacio donde tenemos los cuerpos,
-buscando así poder obtener la fuerza aproximandola en distintos
+buscando así poder obtener la fuerza aproximándola en distintos
 puntos de la malla.
 
 Además, los operadores diferenciales del método pasado son reemplazados por
@@ -80,27 +83,36 @@ A grandes rasgos, el método consiste en:
 	\item Repetir el proceso.
 \end{itemize}
 
-Este método presenta un cálculo más rapido que el modelo \emph{Particle-Particle},
+Este método presenta un cálculo más rápido que el modelo \emph{Particle-Particle},
 disminuyendo de la misma forma el orden del algoritmo a, $O(n + ng \log ng)$,
-donde $ng$ es el número de vertices de la malla.
+donde $ng$ es el número de vértices de la malla.
 
 Un problema claro, es la complejidad que conlleva poder solucionar la ecuación de Poisson,
 además de no ser un modelo recomendado para casos en que se quiera estudiar la colisión
 entre cuerpos, ya que los trata casi como un sólo cuerpo, pues
 aproxima cuerpos en los vértices de la malla.
 
+Debido a que el modelo PM es un modelo que lleva bastante
+tiempo como una herramienta disponible para los científicos e investigadores,
+ha tenido gran cabida para dar pie a nuevas investigaciones, como
+es el caso del trabajo de Villumsen~\cite{villumsen}, quien propone
+un nuevo esquema de PM basado en jerarquía, que se diferencia del esquema inicial,
+ya que la ecuación de Poisson es resuelta utilizando métodos de FFT,
+en mallas cúbicas, considerando una estructura de árbol,
+la cual es claramente basaba su estructura en los algoritmos TC.
+Por otro lado, se han realizado modelos más realistas computacionalmente,
+como es el caso de trabajo de Pen~\cite{pen}, donde plantea un modelo PM,
+pero con la diferencia de que utiliza un sistema de coordenadas dinámico
+la cual se va auto-adaptando de acuerdo a la densidad de la distribución
+de los cuerpos, convirtiéndose en una temprana resolución rápida
+en el campo de los algoritmos de n-cuerpos.
 
-%Edmund Bertschinger and James M. Gelb, "Cosmological N-Body Simulations," Computers in Physics, Mar/Apr 1991, pp 164-179.
-%R.W. Hockney and J.W. Eastwood, Computer Simulation Using Particles, Institute of Physics Publishing, 1988
-%A.L. Melott, Comment on "Nonlinear Gravitational Clustering in Cosmology", Physical Review Letters, 56, (1986), 1992.
-%P.J.E. Peebles, A.L. Melott, M.R. Holmes, and L.R. Jiang, "A Model for the Formation of the Local Group," Ap J, 345, (1989) 108.
+\subsection{Treecodes (TC)}
 
-\subsection{Treecodes}
-
-El presente modelo fue propuesto por Barnes \& Hut \red{CITE}
-en el año \red{AÑO}, y hoy en día sigue siendo
-uno de los modelos base más utilizado, pues a partir de este
-mecanismo, muchos investigadores han realizado pequeñas modificaciones,
+El presente modelo fue propuesto por Barnes \& Hut~\cite{treecode}
+en el año 1986, y hoy en día sigue siendo uno de los modelos base más utilizado,
+pues a partir de este mecanismo,
+muchos investigadores han realizado pequeñas modificaciones,
 para poder obtener, ya sea un menor tiempo de ejecución o menor orden
 del algoritmo.
 
@@ -112,13 +124,13 @@ obteniendo un gran cuerpo, en vez de varios dispersos.
 Además de ser un esquema inteligente para poder agrupar los cuerpos
 lejanos, va dividiendo recursivamente todos los cuerpos,
 en una estructura llamada \emph{quad-tree} en dos dimensiones,
-y \emph{oct-tree} en tres dimensiones, los cuales analogamente
+y \emph{oct-tree} en tres dimensiones, los cuales análogamente
 tienen una representación como un árbol, insertando la idea
 de que la raíz del árbol representa el espacio completo,
-y a medida que van agregandose hijos, estos representarán
+y a medida que van agregándose hijos, estos representarán
 divisiones dentro del espacio donde se encuentran.
 Finalmente podremos decir que cada nodo externo,
-representará un único cuerpo, mientra que los internos,
+representará un único cuerpo, mientras que los internos,
 representarán el grupo de cuerpos aproximado.
 
 El procedimiento para calcular la fuerza sobre un cuerpo consiste en:
@@ -154,39 +166,39 @@ con raíz en un nodo $x$, consta en:
 \end{itemize}
 
 El principal punto a favor,
-es que las fuerzas sobre todos los cuerpos se obteienen con operaciones
+es que las fuerzas sobre todos los cuerpos se obtienen con operaciones
 con orden $O(n log n)$.
 
 El problema es que se pierde precisión al aproximar los cuerpos
 en uno sólo al estar lo suficientemente lejos.
 
+Luego del primer acercamiento de algoritmos TC,
+algunos investigadores comenzaron a mejorar ciertos aspectos
+en los cuales la eficiencia no era muy favorable,
+como es el caso del trabajo de Jernigan et al.~\cite{jernigan},
+el cual tiene como enfoque principal poder controlar
+el error generado por los algoritmos TC,
+estableciendo límites para respetar la conservación
+de la energía de los cuerpos.
 
-
-%A wonderful explanation of the serial Barnes-Hut algorithm can be found on the Web at UC Berkeley as a course lecture. Go to: http://www.icsi.berkeley.edu/cs267/lecture26/lecture26.html. (For more information about this site, See the below Other N-Body WWW Sources.
-%Another very nice explanation of Tree Codes can be found at: http://www.infomall.org/npac/pcw/node278.html from the book: Parallel Computing Works. This book describes a set of application and systems software research projects undertaken by the Caltech Concurrent Computation Program (CP) from 1983-1990.
-%You can find several version of Barnes' Tree code at: ftp://hubble.ifa.hawaii.edu/pub/barnes/treecode/
-%A.W. Appel, "An Efficient Program for Many-Body Simulations," Siam, J. Sci. Stat. Comput., 6 (1985), 85-103.
-%J. Barnes and P. Hut, "A Hierarchical O(n log n) Force Calculation Algorithm," Nature, v. 324, December 1986.
-%Joshua E. Barnes and Lars E. Hernquist, "Computer Models of Colliding Galaxies," Physics Today, March 1993, pp 54-61.
-%J. Barnes and L. Hernquist, Annual Reviews of Astronomy and Astrophysics, 1992.
-%L. Hernquist, ApJ Supplement, 64, 1987, 715.
-%S. L. W. McMillan and S. J. Aarseth (1993). "An O(NlogN) Integration Scheme for Collisional Stellar Systems", Ap. J., Vol. 414, p. 200-212.
-%Susanne Pfalzner and Paul Gibbon, Many-Body Tree Methods in Physics, 1996 176 pp. 49564-4 Hardback $57.95, Cambridge University Press. A clear description and introduction to tree-methods. I like it. You can get more information about the book from this Europe Web site and this U.S. site.
-%Sellwood, J.A. 1989, MNRAS, 238, 115.
-%J. Salmon and M. Warren, "Skeletons from the Treecode Closet", J. Comp. Phys. v 111, n 1, 1994; or http://www.ccsf.caltech.edu/~johns/ftp/nbody/skeletons.ps.Z
-%For more Salmon bibliographic references related to Barnes-Hut, see: John Salmon's "Electronically available publications"
-%The following report describes an implementation of Salmon's version of the Barnes-Hut algorithm to run on a the CM-5. The code is written so that it is relatively easy to port other tree algorithms (the Greengard/Rokhlin 3D adaptive FMM for example).
-%P. Liu and S. Bhatt, Experiences with Parallel N-body simulations, to appear in the Proceedings of the 1994 ACM Symposium on Parallel Algorithms and Architectures.
-%P. Liu, The parallel implementation of N-body algorithms, Ph.D. dissertation, Yale University, 1994.
-%An N-body Tree method that I have not had time to look at is Andrey Kravtsov's "Adaptive Tree Refinement (ART)" (see publication list, which is a mesh based Eulerian code which adaptively refines meshes in the places where higher force resolution is desired. This method is used for large high-resolution cosmological simulation.
-
-
+A tal punto han llegado los algoritmos TC,
+que han sido objeto de estudio para poder obtener
+un buen desempeño en clusters de GPU,
+siendo así un caso típico de prueba
+para poder obtener desempeños que han sido
+ganadores de distintos premios, como es el caso de
+Hamada et al.\cite{hamada}, el cual se ha adjudicado
+el Gordon Bell prize~\footnote{\url{http://awards.acm.org/bell/}}
+en variadas ocasiones, obteniendo en uno de sus últimos
+trabajos obtener 190 TFlops utilizando algoritmos
+TC en el problema de n-cuerpos.
 
 \subsection{Multipole methods}
 % n
 
 El \emph{Fast Multipole Mehod} es uno de los métodos
-más usados, por su poca complejidad y la alta precisión que provee.
+más usados, por su poca complejidad y la alta precisión que provee,
+siendo propuesto por Leslie Greengard en su tesis de doctorado~\cite{leslie}.
 
 A grandes rasgos, consiste en un \emph{Treecode} que utilizar
 dos representaciones del campo de potencial,
@@ -194,7 +206,7 @@ las cuales son, un campo lejano, que sería un \emph{multipole}
 y expansiones locales.
 
 Como éste método utiliza un cálculo rápido del campo de potencial,
-es muy facil poder realizar el procedimiento computacionalmente,
+es muy fácil poder realizar el procedimiento computacionalmente,
 en comparación al cálculo de la fuerza, siendo esta última
 un vector contrariamente al escalar que es el potencial $(\phi (x,y,z))$.
 Aquí es necesario poder recordar una equivalencia de física
@@ -215,19 +227,19 @@ pero se diferencia en los siguientes aspectos:
 	\item El presente método calcula el potencial en todos los puntos,
 		no la fuerza, como lo hace \emph{Treecode}.
 	\item El presente método utiliza más información que la masa
-		y el centro de las particulas en una región, ya que al ser
+		y el centro de las partículas en una región, ya que al ser
 		una expansión con más precisión, crece su complejidad.
-	\item La desición de si una región (conjunto de cuerpos) se utiliza o no
+	\item La decisión de si una región (conjunto de cuerpos) se utiliza o no
 		como un sólo cuerpo, depende sólo de la posición y tamaño
 		de la región, no de la posición del centro de masa de la región.
 \end{itemize}
 
 El ser un método con más precisión, tiene su costo,
-el cual fue demotrado por McMillan et al.\red{CITE}, % McMillan and S. J. Aarseth (1993)
+el cual fue demostrado por McMillan et al.\cite{mcmillan},
 los cuales mencionan que no es un buen modelo para estudiar colisiones de sistemas
-debido a que es más lento en comparación a otros mpetodos y
-por que posee un tiempo constante al momento de ebaluar la fuerza de un número
-de particulas, con un orden O(1).
+debido a que es más lento en comparación a otros métodos y
+por que posee un tiempo constante al momento de evaluar la fuerza de un número
+de partículas, con un orden O(1).
 
 Sin embargo, el presente modelo es ampliamente utilizado para aplicaciones
 en las cuales los cuerpos poseen los mismos o similares
@@ -235,21 +247,13 @@ pasos de tiempos, al momento de evaluar las ecuaciones de movimiento.
 
 Si bien es cierto,
 este algoritmo es famoso al proponer un orden usualmente de $O(n)$,
-existe un trabajo de Srinivas Aluru \red{CITE},
-en la cual asegura que el algoritmo no posee ese orden,
-debido a que \red{RESPUESTA}.
-
-% For a wonderful explanation (pictures etc.) see the UC Berkeley Web site: http://www.icsi.berkeley.edu/cs267/lecture27/lecture27.html. (Most of the information in this section came from there. See the below Other N-Body WWW Sources for more information about this site.)
-% Srinivas Aluru, "Greengard's N-Body Algorithm Is Not Order N," SIAM Journal on Scientific Computing, May 1996, Volume 17, Number 3.
-% William D. Elliott and John A. Board, Jr., "Fast Fourier Transform Accelerated Fast Multipole Algorithm," SIAM Journal on Scientific Computing, March 1996, Volume 17, Number 2.
-% Leslie Greengard, "The Numerical Solution of the N-Body Problem, " Computers in Physics, Mar/Apr 1990, pp 142-152.
-% This algorithm was first published in "A Fast Algorithm for Particle Simulations", L. Greengard and V. Rokhlin, J. Comp. Phys., v 73, 1987.
-% Greengard's 1987 Yale dissertation "The Rapid Evaluation of Potential Fields in Particle Systems" won an ACM Distinguished Dissertation Award.
-% S. L. W. McMillan and S. J. Aarseth (1993). "An O(NlogN) Integration Scheme for Collisional Stellar Systems", Astrophys. J., Vol. 414, p. 200-212.
-% An adaptive FMM based upon Van Dommelen and Rundensteiner (J. Comp. Phys, v83, pp. 126-147 (1989)) has been implemented on a T8000-transputer system. It relies on sorting the vortices in the streamwise and transverse directions, and then distributing (approximately) equal numbers on each processor for even load balancing. This seems to work well, particularly when the problem granularity is coarse (ie: Large number of vortices, O(10^6), on relatively few processors, O(10). For more details, see the paper Clarke and Tutty (1994) below.
-% Clarke, NR & Tutty, OR, "Construction and Validation of a Discrete Vortex Method for the Two-Dimensional Incompressible Navier-Stokes Equations," Computers Fluids, vol. 23, No. 6, pp 751-783 (1994).
-% 
-% A possible useful reference is G. Pringle's thesis: "Numerical Study of Three-Dimensional Flow using Fast Parallel Particle Algorithms" which describes a parallel version of the FMM in both 2 and 3 dimensions.
-% You may find the following paper useful: "A comparison between Fast Multipole Algorithm and Tree-Code to evaluate gravitational forces in 3-D" by R. Capuzzo-Dolcetta and P. Miocchi, submitted to Journ. Comp. Phys. You can download it at: http://xxx.lanl.gov/abs/astro-ph/9703122.
-% Here is more FMM related work: An Improved Fast Muiltipole Algorithm for Potential Fields, by Tomasz Hrycak and Vladimir Rokhlin.
-% 
+existe un trabajo de Srinivas Aluru~\cite{srinivas},
+en la cual asegura que el algoritmo no posee dicho orden,
+debido a que sólo en el mejor de los casos es obtenido,
+dejando de lado el análisis del peor escenario posible para
+el algoritmo. Al analizar cada paso del algoritmo,
+desde la construcción del mismo árbol, en donde Greengard
+establece algunas constantes en las cuales Srinivas
+justifica que no son posible, se llega a la conclusión
+de que el algoritmo a lo menos se comportará con un orden
+de $O(N log^{2} N)$.
