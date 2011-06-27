@@ -25,8 +25,8 @@ serán actualizadas dependiendo de la interacción con otros cuerpos.
 % ejemplo informal
 Un ejemplo clásico de lo que es el problema de \emph{n-cuerpos},
 es el movimiento de los planetas en nuestro sistema solar,
-el cual se vé afectado tanto de las propiedades del Sol,
-como de todos los otros cuerpos que se encuntran entre sus órbitas.
+el cual se ve afectado tanto de las propiedades del Sol,
+como de todos los otros cuerpos que se encuentran entre sus órbitas.
 
 % interes del problema
 El factor de interés del problema de \emph{n-cuerpos}
@@ -34,14 +34,14 @@ es que los algoritmos numéricos que se desarrollan para resolver
 la dinámica de este problema, puede aplicarse no sólo en el área de la astrofísica,
 con campos como \emph{Celestial mechanics}, \emph{Dense stellar systems},
 \emph{Sphere of influence of a massive BH}, y \emph{Galaxy dynamics and cosmology},
-si no que también es ampliamente utilizado en el área de dinámica de fluídos,
+si no que también es ampliamente utilizado en el área de dinámica de fluidos,
 el cual por  ejemplo puede verse reflejado en el trabajo de Gingold et al.~\cite{gingold}
 donde se toma como objetivo principal un método de resolución de modelos físicos,
-mas que la interacción misma de las particulas.
+mas que la interacción misma de las partículas.
 
 Otra área importante dentro de la dinámica de fluidos son los \emph{Vortex Methods},
 los cuales son una técnica para realizar la simulación de distintos flujos turbulentos
-de un fluído en particular. Sin embargo, las aplicaciones no se quedan sólo en la teoría
+de un fluido en particular. Sin embargo, las aplicaciones no se quedan sólo en la teoría
 pues por ejemplo, se han realizado simulaciones de humo en tiempo real
 para utilizarlo en el desarrollo de video juegos~\cite{gourlay}.
 
@@ -55,11 +55,11 @@ aspectos claves, que determinarán la dificultad del cálculo.
 
 Primero se requiere un escenario inicial para dicho problema,
 por lo cual existen distintas alternativas, las cuales pueden ser
-generar las posiciones aleatoreamente, que de por sí conlleva un problema,
+generar las posiciones aleatoriamente, que de por sí conlleva un problema,
 o ocupar modelos existentes para generar una situación inicial,
 como \emph{Plummer model} que aunque carece de realismo,
 intenta entregar un escenario distribuido de cuerpos
-basandose en la densidad de un cierto sistema.
+basándose en la densidad de un cierto sistema.
 
 Otro aspecto importante es que como debemos trabajar con la interacción
 entre los cuerpos, se debe utilizar un método para integrar las ecuaciones
@@ -75,10 +75,10 @@ los cuales poseen una precisión mucho mejor que los métodos anteriores, pero s
 más caros a nivel de cálculo.
 
 Finalmente, el punto más importante para el presente problema es el cálculo
-de la fuerza entre las particulas, tema principal del presente trabajo,
-ya que si consideramos que la fuerza ejercida sobre una particula está determinada
-por todo el resto de particulas en un sistema determinado, el orden del algoritmo
-crecerá en forma cuadrática al aumentar la cantidad de particulas,
+de la fuerza entre las partículas, tema principal del presente trabajo,
+ya que si consideramos que la fuerza ejercida sobre una partícula está determinada
+por todo el resto de partículas en un sistema determinado, el orden del algoritmo
+crecerá en forma cuadrática al aumentar la cantidad de partículas,
 tema por el cual variados investigadores han realizado técnicas para disminuir
 el orden de $O(n^2)$ que posee en su versión inicial, ocupando un enfoque
 \emph{Particle-Particle}.
