@@ -1,4 +1,4 @@
-Los tipos de interfaces podríamos definirmos de la siguiente forma:
+Los tipos de interfaces podríamos definirlos de la siguiente forma:
 
 \subsection{Control automatizado}
 
@@ -14,8 +14,8 @@ permite el control de un Telescopio real o un telescopio en un ambiente
 simulado.
 
 La idea principal es poder generar un entorno simple~\ref{fig:hevelius},
-para tanto astronomos aficionados como profesionales,
-en el cual se representan conceptos básicos del control de telescópios,
+para tanto astrónomos aficionados como profesionales,
+en el cual se representan conceptos básicos del control de telescopios,
 pudiendo ser un buen acercamiento al mundo de la astronomía.
 
 \begin{figure}[!htb]
@@ -25,6 +25,30 @@ pudiendo ser un buen acercamiento al mundo de la astronomía.
     \label{fig:hevelius}
 \end{center}
 \end{figure}
+
+La interfaz posee tres secciones principales,
+
+\begin{itemize}
+    \item Visualización en tiempo real del cielo, la cual
+        consiste en la parte principal  del programa,
+        al ser un elemento que debe ser modificado en tiempo real
+        a medida que el telescopio se mueva.
+    \item Control del telescopio, los que permiten poder
+        mover ya sea manualmente el telescopio, o manualmente
+        ingresando la información en radianes, o seleccionar
+        de un catalogo una posición determinada.
+    \item Estado del telescopio y elementos externos,
+        de los cuales se pueden observar condiciones climáticas,
+        las cuales son muy importantes a la hora de realizar
+        una observación.
+\end{itemize}
+
+La interfaz es bastante simple,
+salvo que hay información que quizás no sea necesaria
+desplegar todo el tiempo, o mejor dicho,
+que podrían ser agrupados de mejor forma,
+debido a que la imagen real del cielo tiene
+menos de un 25\% del tamaño de la interfaz.
 
 \subsection{Análisis de datos}
 
@@ -76,14 +100,14 @@ una interfaz gráfica.
 \subsection{Configuraciones de sistemas}
 
 En grandes proyectos, con una gran cantidad de variables y sistemas, que se relacionan
-unos con otras, una simple accion o accidente puede provocar una cadena de reacciones
+unos con otras, una simple acción o accidente puede provocar una cadena de reacciones
 debido a la naturaleza del sistema.
 
 Por ejemplo, si un cable de red que conecta dos computadores de pronto se corta,
 todas las aplicaciones que utilizan dicha conexión fallarán, lo que provocará
 que otras aplicaciones también fallen, y así sucesivamente.
 
-¿Que problema más profundo puede ocacionar esto?
+¿Que problema más profundo puede ovacionar esto?
 de que todos los errores de las aplicaciones y/o dispositivos pueden crear
 una gran confusión al momento de buscar el problema.
 
@@ -103,6 +127,16 @@ validados mediante archivos XSD.
     \label{fig:acg}
 \end{figure}
 
+La interfaz es un claro ejemplo,
+de una problemática muy habitual al momento
+de querer realizar programas para configurar variadas opciones de sistemas,
+las cuales de mala forma suelen llenar una vista principal
+de demasiadas opciones, volviendo la interfaz en algo poco eficiente,
+pero en este caso, se han organizado distintas vistas,
+para poder realizar las configuraciones y revisar los estados
+de una forma mas ordenadas, lo que se pudo llevar a cabo utilizando
+pestañas.
+
 \subsection{Observatorios virtuales y planetarios}
 
 El concepto de un observatorio virtual tiene relación a un conjunto de archivos
@@ -112,7 +146,7 @@ mediante una conexión directa con los servidores donde se encuentra
 la información, pueden generar un ambiente real de trabajo,
 el cual puede ser utilizado por científicos en distintos lugares del mundo.
 
-En palabras simples, podriamos decir que un observatorio virtual es un conjunto
+En palabras simples, podríamos decir que un observatorio virtual es un conjunto
 de centros de datos, los cuales son colecciones de datos astronómicos,
 los que están apoyados por herramientas de software para realizar
 cálculo científico.
@@ -120,174 +154,166 @@ cálculo científico.
 La idea detrás de las interfaces gráficas consiste,
 en poder automatizar distintos procesos astronómicos,
 como cálculos de coordenadas, aplicar filtros, búsqueda
-de datos, recuperaciónde información, etc.
+de datos, recuperación de información, etc.
 
-%Un planetario es un lugar dedicado a la presentación de espectáculos astronómicos y en el cual es posible observar recreaciones del cielo nocturno de diversos lugares de la Tierra y en diferentes momentos del año. Normalmente un planetario consta de una pantalla de proyección en forma de cúpula y un proyector móvil capaz de proyectar las posiciones de estrellas y planetas.
-%
-%Algunos programas de ordenador permiten simular la posición en el cielo de las estrellas y planetas. Entre los más conocidos se encuentran los programas de código libre: Celestia, Stellarium y NightShade; no-libre pero igualmente gratuito Winstars; y de pago Starry Night.
+Por otro lado sabemos que un planetario es un lugar ideado
+para poder desplegar sucesos o elementos astronómicos,
+pudiendo observar una recreación de todo el espacio,
+ya sean planetas, estrellas, etc, pero el concepto
+no es sólo un lugar físico, como un museo, sino que también
+sirven aplicaciones gráficas que cumplen la misma función,
+los cuales se esmeran en poder simular la posición
+del cielo, estrellas, galaxias, constelaciones, etc.
+
+A continuación se detallan algunas aplicaciones que siguen la lógica
+de los dos conceptos descritos anteriormente.
 
 \subsubsection{KStars}
-% 1.
-% KStars is a graphical desktop planetarium for KDE. It depicts an accurate simulation of the night sky, including stars, constellations, star clusters, nebulae, galaxies, all planets, the Sun, the Moon, comets and asteroids. You can see the sky as it appears from any location on Earth, on any date.
-% 
-% The user interface is highly intuitive and flexible. The display can be panned and zoomed with the mouse, and you can easily identify objects and track their motion across the sky. KStars includes many powerful features, yet the interface is clean and simple and fun to use.
-% 
-% 
-% 2.
-% Description
-% KStars is a Desktop Planetarium for KDE. It provides an accurate graphical simulation of the night sky, from any location on Earth, at any date and time. The display includes upto 100 million stars, 13,000 deep-sky objects,all 8 planets, the Sun and Moon, and thousands of comets and asteroids.
-% 
-% Features
-% 
-% Catalogs:
-%     Default catalog consisting of stars to magnitude 8
-%     Extra catalogs consisting of 100 million stars to magnitude 16
-%     Downloadable catalogs including Messier Images, Abell Planetary Nebulae
-% Corrections for precession, nutation and atmospheric refraction
-% Tools for retrieval of data from Online Databases
-% Scriptable actions using D-Bus
-% Integration with INDI provides support for a wide range of instruments
-% Features for Educators and Students:
-%     Adjustable simulation speed in order to view phenomena that happen over long timescales
-%     KStars Astrocalculator to access some of the internal calculations of KStars, and also to predict conjunctions etc
-%     Astroinfo project to help facilitate learning with the aid of KStars
-%     Internet links for further information / pictures of objects
-% Features for Amateur Astronomers:
-%     Observing List tool to plan observations
-%     FOV Editor helps calculate field of view of equipment and display them
-%     Obtain AAVSO light curves for variable stars
-%     What's up tonight tool
-%     Altitude vs Time tool
-%     Sky Calendar tool
+
+Esta aplicación gráfica, está diseñada como parte del módulo
+de educación del proyecto KDE~\cite{kde}.
+Su idea principal es poder ofrecer una simulación
+del cielo nocturno, la cual contiene información
+de estrellas, constelaciones, nebulosas, galaxias, planetas, etc.
+
+La simulación se basa en poder observar el cielo desde cualquier
+ubicación en el mundo, a cualquier hora, lo cual es una herramienta
+muy útil para astrónomos amateurs, debido a que con \emph{KStars}
+uno puede buscar las constelaciones en mi ubicación actual
+para poder enfocarlas con algún telescopio amateur.
+
+La interfaz que provee~\ref{fig:kstars2} es bastante intuitiva y flexible,
+debido a que se conforma de un menú superior, con accesos directos 
+a las opciones más importantes, las cuales permiten poder configurar
+a gusto las capas que se despliegan, las que pueden ser:
+
+\begin{itemize}
+    \item Estrellas,
+    \item Objetos celestes,
+    \item Objetos del sistema solar,
+    \item Constelaciones,
+    \item etc.
+\end{itemize}
+
+y además un menú estándar de cualquier aplicación KDE.
+
+Al comienzo del programa, existe un wizard~\ref{fig:kstars1} que permite al usuario
+seleccionar la posición en el mundo en que se encuentra,
+ya sea ingresando manualmente longitud y latitud, o seleccionando
+la ciudad de una lista.
+
+Por otro lado el plano estelar tiene opciones de zoom, llevados a cabo
+con el mouse, entregando al usuario la facilidad de buscar e identificar objetos
+en el cielo.
+
+\emph{KStars} contiene variados catálogos de la información
+de las estrellas en el cielo, entregando al usuario la posibilidad
+de descargar material externo, como imágenes especializadas,
+tipos especiales de nebulosa y otros catálogos de estrellas.
+
+Finalmente \emph{KStars} está pensado para dos tipos de públicos,
+astrónomos amateurs y educadores/estudiantes, siendo este último
+un público objetivo que puede sin problema, ajustar velocidades
+de ciertas simulaciones de fenómenos, realizar cálculo astrales,
+optar a cursos en línea de información astronómica y poder
+obtener imágenes reales de bases de datos mundiales.
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=0.5\textwidth]{img/kstars}
-    \caption{\emph{KStarts}, dos vistas en la ventana principal}
-    \label{fig:kstars}
+    \includegraphics[width=0.3\textwidth]{img/kstars1}
+    \caption{\emph{KStarts}, wizard de configuración}
+    \label{fig:kstars1}
 \end{figure}
 
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/kstars2}
+    \caption{\emph{KStarts}, ventana principal}
+    \label{fig:kstars2}
+\end{figure}
+
+
+
 \subsubsection{GCX}
-% 1.
-% 
-% Gcx is an astronomical image processing and data reduction tool, with an easy to use graphical user interface. It provides a complete set of data reduction functions for CCD photometry, with frame WCS fitting, automatic star identification, aperture photometry of target and standard stars, single-frame ensemble photometry solution finding, multi-frame color coefficient fitting, extinction coefficient fitting, and all-sky photometry; as well as general-purpose astronomical image processing functions (bias, dark, flat, frame alignment and stacking); It can function as a FITS viewer.
-% 
-% The program can control CCD cameras and telescopes, and implement automatic observation scripting. Cameras are controlled through a hardware-specific server, to which gcx connects through a TCP socket. It generates FITS files with comprehensive header information.
-% 
-% 
-% 
-% 2.
-% The previous version of GCX , CX was written to control the newly designed cpx3m ccd camera. Once the basic camera control functions were running, it was easy to add some LX200 control functions, so that the telescope could be pointed at various objects without having to switch applications.
-% 
-% Having telescope control and image acquisition integrated into one program makes the following step obvious: after entering goto/get commands over several cold nights, one wants to automate the process--especially if he observes a large number of fields every night (as when doing variable star work).
-% 
-% The fact that the author's telescope doesn't point precisely doesn't help automation. So the ability to check/correct the pointing becomes essential. cx first got the ability to read star information from the GSC and overlay it on the images; that eases visual checks (one doesn't need maps anymore) but still is one step short of full automation.
-% 
-% Finally, when reliable field matching was implemented in GCX , it became possible to make the program fully automatic. In the current version, GCX can run through a list of observations completely unattended, and only stops if clouds roll in.
-% 
-% As it happens, field matching and image processing are also essential steps for CCD photometry. Over the time, the photometry functions of GCX have expanded continuously up to the point where they contribute the largest part of the program. It is currently possible to reduce photometric data frames in a completely automatic fashion, and perform color transformations, transformation coefficient fitting and all-sky reduction with relative ease.
-% 
-% Features
-% 
-% Image handling
-% 
-% Open/save 16-bit FITS image files;
-% GCX uses floating-point images internally, so other FITS formats are easy to add;
-% 
-% Zoom/Pan images, adjust brightness/contrast/gamma in an intuitive way, appropiate for astronomical images;
-% Convert FITS files to 8-bit PNM after intensity mapping;
-% Show image statistics (both global and local);
-% Maintain a noise model for the image across transformations; //
-% Maintain bad pixel information;
-% Perform ccd reductions (dark/bias/flat);
-% Automatically align (register) and stack images.
-% 
-% Catalogs and WCS
-% 
-% Read field star information from GSC1/2 and Tycho2;
-% Read object information from edb and native files;
-% Read recipy files;
-% Detect sources (stars) from images;
-% Overlay objects on the image;
-% Edit objects' information;
-% Match image stars to catalog positions;
-% Calculate world coordinates for image objects.
-% 
-% Camera Control
-% 
-% Control cameras over a TCP socket using a simple protocol;
-% The control proces (cpxcntrl) presently supports the cpx3m camera. It can be easily modified to support other cameras.
-% 
-% Acquire images under script control;
-% Set binning/windowing/integration times/temperature;
-% Dark frames;
-% All acquired frames are fully annotated in their FITS headers;
-% Auto-generate descriptive names for files.
-% 
-% Telescope control
-% 
-% Support LX200 protocol over serial;
-% Point telescope under script control;
-% Point telescope by object name (if edb catalogs are installed);
-% Refine pointing by comparing image star positions with catalogs;
-% 
-% Aperture Photometry
-% 
-% Do sparse field stellar photometry using fixed circular apertures for stars, annular apertures for sky estimation;
-% Aperture sizes fully programmable;
-% Multiple sky estimation methods;
-% Uses a complex error model thorughout, that takes into account photon shot noise, read noise, noise of the callibration frames and scintillation;
-% Report noise estimates for every result;
-% Take photometric targets (program and standard stars) from recipy files, or directly from the image;
-% Produce a comprehensive report.
-% 
-% Multi-Frame Reductions
-% 
-% Fit color transformation coefficients from multiple frames;
-% Fit extinction coefficients;
-% Perform all-sky reductions;
-% Generate various plots for data checking;
-% 
-% Interfacing
-% 
-% Uses plain-ascii files for configuration files, reports and recipies;
-% Implements import filters and an output converter to interface with tabular formats;
-% Most functions available in batch mode, so the program can be made part of a script.
 
+Esta herramienta está enfocada a el procesamiento de imágenes astronómicas
+y reducción de datos de la misma naturaleza, centrando su objetivo en proveer
+una interfaz simple.
 
+\emph{GCX} provee diferentes funcionalidades para realizar fotometría
+con cámaras CCD, utilizando identificación de objetos celestes,
+utilizando un sistema llamado WCS. Por otro lado, respecto al procesamiento
+de imágenes, permite al usuario utilizar funciones para tratar dichas
+imágenes, de manera de por ejemplo, eliminar ruido, alinear con respecto
+a otros objetos, intensidad de colores, etc.
+
+Una de las característica importantes de \emph{GCX} es sin lugar a dudas,
+el control de cámaras CCD y telescopios amateur, las cuales
+permiten al usuario ingresar la ruta a algún script que permita
+realizar una rutina de observación, de la cual, provee la funcionalidad
+de ayudar astrónomos amateurs a poder apuntar correctamente el telescopio
+a un lugar determinado en el cielo, tarea principal para realizar
+una buena observación.
+
+Al proveer información de catálogos internacionales,
+asegura un funcionamiento con bastante precisión,
+tarea que no es sencilla a la hora de realizar
+una interfaz que interpreta información precisa.
+
+La interfaz~\ref{fig:gcx}, a modo de diseño es bastante simple y
+poco llamativa a la vista
+del usuario, pues no utiliza ninguna biblioteca externa para poder
+generarla, sólo las que provee Xorg.
+El único menú superior contiene todas las opciones
+necesarias para poder trabajar con las imágenes
+y el control de dispositivos, pero no ofrece
+ningún wizard de configuración o algún mensaje que advierta
+al usuario, que se deben descargar por separado las imágenes
+en formato \emph{fit} o que se deben configurar los servidores
+para obtener imágenes de un catalogo.
 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=0.5\textwidth]{img/gcx}
-    \caption{\emph{GCX}, dos vistas en la ventana principal}
+    \caption{\emph{GCX}, ventana principal con una imagen en formato $fit$ cargada.}
     \label{fig:gcx}
 \end{figure}
 
 \subsubsection{Celestia}
 
-% Choose a point within the Local Group of galaxies, and Celestia will show you an approximation of how it would appear to your eyes were you actually there. Orbit a couple kilometers above the surface of a tiny, irregular asteroid, then head off towards Jupiter, watching it grow from a bright point of light into a looming sphere filling your field of vision.
-% 
-% Leave our solar system entirely and observe the sun as it fades from a brilliant disk to a bright star, disappearing almost entirely as you head off toward the Upsilon Andromeda system to orbit around its innermost giant planet.
-% 
-% 
-% Unlike most planetarium software, Celestia doesn't confine you to the surface of the Earth. You can travel throughout the solar system, to any of over 100,000 stars, or even beyond the galaxy.
-% All movement in Celestia is seamless; the exponential zoom feature lets you explore space across a huge range of scales, from galaxy clusters down to spacecraft only a few meters across. A 'point-and-goto' interface makes it simple to navigate through the universe to the object you want to visit.
-% Celestia is expandable. Celestia comes with a large catalog of stars, galaxies, planets, moons, asteroids, comets, and spacecraft. If that's not enough, you can download dozens of easy to install add-ons with more objects.
-% 
-% 
-% 
-% 
-% Celestia is a free real-time space simulation that lets you visually experience our universe in three dimensions.
-% Celestia was the initial inspiration and creation of Mr. Chris Laurel, a Seattle, WA computer programmer who in
-% 2001, decided to write a free software program to be made available to everyone on the world-wide-web that
-% would place you in control of a virtual reality world of the universe. His vision and dedication gave birth to a
-% program that is unlike any other space simulation program in existence. Celestia doesn't confine you to the
-% surface of the Earth as do many other programs. Instead, Chris created a dynamic capability to travel throughout
-% the Solar System and elsewhere in space, at any speed, at any moment of time and in any direction you choose. If
-% you wish, you can fly via your own “hyperdrive” spacecraft to visit stars within the spiral arms of the Milky Way
-% beyond the confines of our Sun, or leave the galaxy entirely to view the bigger universe from deep space. Chris
-% also insisted this program would be scientifically accurate … a true source of dynamic astronomical graphics.
+La presente aplicación, tiene como objetivo principal la simulación
+del espacio, para poder visualizar el universo de una forma
+cercana a la real, en tres dimensiones.
 
+Al momento de seleccionar cualquier punto en el espacio,
+la aplicación mostrará aparte de la aproximación visual
+de cómo se debería ver, desplegará información detallada,
+de la posición, la cual será útil para astrónomos amateurs,
+para poder posicionar correctamente un telescopio.
+
+El objetivo principal de \emph{Celestia}
+es poder transformar la experiencia de un observatorio virtual
+en algo inolvidable, y lo consigue por el dinamismo de los recorridos
+virtuales.
+
+Otra características importante, es que la aplicación
+no sólo permite poder navegar en el sistema solar,
+sino que además permite viajar a lugares
+muy distantes en comparación a nuestra galaxia.
+
+\emph{Celestia} provee una interfaz llamativa~\ref{fig:celestia},
+basada en la biblioteca gráfica GTX, la cual consiste en una única ventana,
+en la cual despliega la simulación de la galaxia,
+teniendo en su parte superior un menú bastante simple de comprender
+a la hora de buscar alguna opción determinada,
+como cargar una rutina, buscar posiciones de planetas, etc.
+
+Posee la buena idea de poder
+brindar al usuario una ruta por distintas localidades,
+desplegando información astronómica útil,
+acerca de planetas, distancias, etc,
+lo cual puede ser un punto a favor si queremos
+enfocar estar interfaz a nivel educacional.
 
 \begin{figure}[!htb]
     \centering
