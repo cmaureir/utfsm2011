@@ -1,0 +1,87 @@
+\begin{frame}[fragile]
+	\frametitle{Algorithm}
+	\framesubtitle{Pseudocode}
+	\begin{center}
+		\begin{algorithmic}
+			\STATE $updateAccelerations()$
+			\FOR {$counter = 0 \to iterations$}
+			    \STATE $updatePositions()$
+			    \STATE $updateAccelerations()$
+			    \STATE $updateVelocities()$
+			\ENDFOR
+		\end{algorithmic}
+	\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Algorithm}
+\framesubtitle{OpenMP}
+\begin{lstlisting}[style=C]
+void updateAccelerations(){
+    int i,j;
+    for (i = 0; i < n; i++) {
+        bodies[i].ax = bodies[i].ay = bodies[i].az = 0;
+    }
+    #pragma omp parallel for private(j)
+    for (i = 0; i < n; i++) {
+        for(j=0; j<n; j++){
+            if(j != i){
+                accelerationCalc(i,j);
+            }
+        }
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Algorithm}
+\framesubtitle{Pthreads}
+\begin{lstlisting}[style=C]
+void updateAccelerations(){
+    int i;
+
+    for (i = 0; i < n; i++) {
+        bodies[i].ax = bodies[i].ay = bodies[i].az = 0;
+    }
+    int bound = n/cores;
+    for (i = 0; i < cores; i++) {
+        threads[i].ini = i * bound;
+        threads[i].end = threads[i].ini + bound;
+        pthread_create(&threads[i].thread, NULL , accelerationCalc, (void *)&threads[i]);
+    }
+
+    for(int j=0 ; j < cores ; ++j){
+        pthread_join(threads[j].thread, NULL);
+    }
+
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Algorithm}
+\framesubtitle{CUDA}
+\begin{lstlisting}[style=C]
+__global__ void nbody(particle *bodies,float iter, float dt, int N){
+    reset_accelerations(bodies,N);
+    __syncthreads();
+    update_accelerations(bodies, N);
+    __syncthreads();
+    
+    for (float t = 0.0; t < iter; t += dt){
+    
+        update_positions(bodies,dt,N);
+        __syncthreads();
+
+        reset_accelerations(bodies,N);
+        __syncthreads();
+
+        update_accelerations(bodies,N);
+        __syncthreads();
+    
+        update_velocities(bodies,dt,N);
+        __syncthreads();
+    }
+\end{lstlisting}
+\end{frame}
