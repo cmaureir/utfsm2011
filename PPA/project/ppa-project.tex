@@ -15,10 +15,16 @@
 \definecolor{gray97}{gray}{.97}
 \definecolor{gray75}{gray}{.75}
 \definecolor{gray45}{gray}{.45}
+
+\newcommand{\blue}{\textcolor{blue}}
+\newcommand{\red}{\textcolor{red}}
+\newcommand{\green}{\textcolor{green}}
+
+
 \usetheme[pageofpages=of,% String used between the current page and the
                          % total page count.
           alternativetitlepage=true,% Use the fancy title page.
-          titlepagelogo=,% Logo for the first page.
+          titlepagelogo=img/logo,% Logo for the first page.
           watermark=,% Watermark used in every page.
           watermarkheight=100px,% Height of the watermark.
           watermarkheightmult=4,% The watermark image is 4 times bigger
@@ -66,10 +72,10 @@
    {language=C,
    }
 
-\author{\large Cristián Maureira Fredes\\\normalsize \textcolor{gray}{cmaureir@csrg.cl}}
-\title{A n-body particle-particle algorithm benchmark}
+\author[C. Maureira]{\large Cristián Maureira Fredes\\\normalsize \textcolor{gray}{cmaureir@csrg.cl}}
+\title[n-body benchmark]{A n-body particle-particle algorithm benchmark}
 \subtitle{Using many and multi cores approaches.}
-\institute{Departamento de Informática\\Universidad Técnica Federico Santa María}
+\institute[UTFSM]{Departamento de Informática\\Universidad Técnica Federico Santa María}
 \date{\today}
 
 \begin{document}

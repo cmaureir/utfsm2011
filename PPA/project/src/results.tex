@@ -1,0 +1,69 @@
+\frame
+{
+\frametitle{Results}
+\framesubtitle{Hardware and Software configuration}
+\begin{itemize}
+    \item CPU: 16 x Intel(R) Xeon(R) CPU E5520  @ 2.27GHz
+    \item RAM: 12 GB
+    \item Graphic Card: 2 x nVidia Tesla C1060.
+    \begin{itemize}
+        \item 1 GPU with 240 cores @ 1.3 GHz
+        \item Memory: 4GB
+    \end{itemize}
+    \item OS: Scientific Linux SL release 5.6 (Boron)
+    \item Kernel: 2.6.18-238.12.1.el5 x86\_64 GNU/Linux
+\end{itemize}
+}
+
+
+\frame
+{
+\frametitle{Results}
+\framesubtitle{OpenMP}
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{img/openmp}
+\end{center}
+}
+
+\frame
+{
+\frametitle{Results}
+\framesubtitle{Pthreads}
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{img/pthreads}
+\end{center}
+}
+
+\frame
+{
+\frametitle{Results}
+\framesubtitle{CUDA}
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{img/cuda}
+\end{center}
+}
+
+\frame
+{
+\frametitle{Results}
+\framesubtitle{General}
+\begin{center}
+    \includegraphics[width=0.8\textwidth]{img/all}
+\end{center}
+}
+
+\frame
+{
+\frametitle{Results}
+\framesubtitle{Acceleration}
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Implementation} & \textbf{Velocity} \\\hline
+        Serial  & 1x  \\\hline
+        OpenMP  & 3x  \\\hline
+        Pthread & 11x \\\hline
+        CUDA    & 18x \\\hline
+    \end{tabular}
+\end{center}
+}

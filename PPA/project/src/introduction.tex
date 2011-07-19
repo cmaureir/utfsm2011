@@ -3,7 +3,7 @@
 \frametitle{Trabajo}
 \framesubtitle{Problema de n-cuerpos}
 \begin{block}{Definición}
-    Predecir el \underline{movimiento} de un grupo de \underline{objetos celestiales},
+    Predecir el \underline{movimiento} de un grupo de \underline{objetos celestes},
     que van \underline{interactuando} unos con otros gravitacionalmente.
 \end{block}
 }
@@ -24,6 +24,67 @@
         \item Dinámica de ``Star clusters''.
         \item Movimiento de planetas.
         \item etc.
+    \end{itemize}
+\end{itemize}
+}
+
+
+\frame
+{
+\frametitle{Trabajo}
+\framesubtitle{Algoritmo}
+Secciones críticas:
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{itemize}
+            \item Posiciones iniciales.
+            \begin{itemize}
+                \item \red{Random.}
+                \item Plummer Model.
+            \end{itemize}
+            \item Método de integración.
+            \begin{itemize}
+                \item Euler.
+                \item \red{Leapfrog.}
+                \item Runge Kutta.
+                \item Two step Adams-Bashworth.
+                \item etc.
+            \end{itemize}
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \begin{itemize}
+            \item Cálculo de las fuerzas.
+            \begin{itemize}
+                \item \red{Particle-Particle.} \blue{$O(n^2)$}
+                \item Particle-Mesh.  \blue{$O(n + ng\log ng)$}
+                \item Treecode. \blue{$O(n\log n)$}
+                \item Multipole. \blue{$O(n)$}
+                \item etc.
+            \end{itemize}
+        \end{itemize}
+    \end{column}
+\end{columns}
+}
+
+
+\frame
+{
+\frametitle{Trabajo}
+\framesubtitle{Algoritmo}
+
+\begin{itemize}
+    \item Cálculo de la fuerza.
+    \begin{itemize}
+        \item Posiciones iniciales $x_i$.
+        \item Velocidades iniciales $v_i$.
+        \item $1 \leq i \leq N$
+    \end{itemize}
+    $$f_{ij} =G \cdot \frac{m_i \cdot m_j}{||r_{ij}||^{2}} \cdot \frac{r_{ij}}{||r_ij||}$$
+    \begin{itemize}
+        \item $m_i$ y $m_j$ masas de los cuerpos $i$ y $j$.
+        \item $r_{ij} = (x_j - x_i )$ vector de distancia entre los cuerpos $i$ y $j$.
+        \item $G$, constante gravitacional. ($6,67428 \times 10^{-11} m^{3} kg^{-1} s^{-2}$)
     \end{itemize}
 \end{itemize}
 }
