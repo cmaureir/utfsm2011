@@ -1,0 +1,114 @@
+% Introduccion a n-body.\\
+The $n-body$ problem is widely used in different investigation
+related to the formation and evolution of several other problems,
+like the planetary clusters, star clusters, galaxy clustering, back holes,
+universe large structure formation, etc.
+
+The main idea of the $n-body$ problem is to simulate the
+motion of a certain particle number, interacting gravitationally
+between each other by a force caused by other bodies.
+So, looking the motion of stars and planets, the gravity
+is the main character of this phenomena.
+This movement is defined by some differential equations
+proposed in first instance by Newton.
+
+%Definición del problema.
+The \emph{n-body} problem is the problem of
+predict the movement of a particles set of celestial objects,
+which interact with each other due to the gravitational force.
+
+Each celestial object will have a determinate \emph{mass} $(m)$
+and a specific location in 3D space
+$(x, y, z)$, in addition to an initial velocity
+determined in each direction $(v_{x}, v_{y}, v_{z})$ and finally
+will have some initial zero acceleration $(a_{x}, a_{y}, a_{z})$.
+It should be noted that the \emph{position}, the \emph{velocity} and \emph{acceleration}
+will be updated depending on the interaction with other bodies
+which follow the gravitational force formula,
+which is defined by:
+
+\begin{eqnarray}
+    f_{ij} =G \cdot \frac{m_i \cdot m_j}{||r_{ij}||^{2}} \cdot \frac{r_{ij}}{||r_ij||}
+\end{eqnarray}
+
+where the initial position are $x_{i}$,
+the velocities are $v_{i}$,
+having a $i$, between values, $1\leq i\leq N$,
+the $i$ and $j$ bodies mass is determined by $m_{i}$ and $m_{j}$
+where $r_{ij} = (x_{j} - x_{i})$ is the distance vector between the $i$ and $j$ bodies
+and then $G$, gravitational constant. ($6.67428\times 10^{-11} m^{3} kg^{-1} s^{-2}$)
+
+A classic example of what is the \emph{n-body} problem
+is the planets movement in our solar system,
+which is affected by the Sun properties
+and as all the other bodies that are between their orbits.
+
+The \emph{n-body} problem interest factor
+is that numerical algorithms are developed to solve
+the dynamics of this problem can be applied not only in the astrophysics area,
+with fields such as \emph{Celestial mechanics}, \emph{Dense stellar systems},
+\emph{Sphere of Influence of a massive BH}, and \emph{Galaxy dynamics and cosmology},
+but it also is widely used in the fluid dynamics field,
+which for example may be reflected in the work of Gingold et al.~\cite{Gingold}
+which takes as its main objective a method of resolution of physical models,
+more than the same particle interaction.
+
+Another important area in fluid dynamics are the \emph{Vortex Methods},
+which are a technique for various turbulent flows simulation of a particular fluid.
+However, applications are not only in theory since, for example,
+have been made simulations of smoke in real time for use in the video games development~\cite{Gourlay}.
+
+% 	¿Por qué es dificil?
+% 		¿Es NP-completo?
+% 		Debilidades de lo existente
+% 		Costo versus calidad de las soluciones
+
+Solving the \emph{n-body} problem consists of three
+key issues that will determine the calculation difficulty.
+
+First, for this problem is required an initial scenario
+so there are alternatives, which can be
+randomly generated positions, which itself carries a problem,
+or take existing models to generate a baseline,
+as \emph{Plummer model} although unrealistic,
+attempts to deliver a distributed bodies scenario
+based on the density of a certain system.
+
+Another important aspect is that as we work with the bodies interaction,
+we need to use a method to integrate the motion equations,
+in order to update \emph{position}, \emph{speed}
+and \emph{acceleration}.
+
+This is where various methods widely known have been used,
+such as \emph{Forward and Backward Euler} which are not recommended
+due to low precision. From that point that other methods have improved
+the operation of the motion equations, such as \emph{Leapfrog integration}.
+Finally, the recommended methods are \emph{Runge Kutta} and \emph{Two-stepAdams Bashworth}
+which have a much better accuracy than previous methods, but are
+highest level of calculation.
+
+Finally, the most important point to this problem is the force calculation between the particles,
+being the main focus of the present work, because if we consider the exerted force on a particle
+is determined by all other particles in a given system, the order of the algorithm grows
+quadratically by increasing the amount of particles, matter by which various researchers have
+conducted techniques to reduce the order of $O(n^2)$ it holds in its initial version,
+taking an approach called \emph{Particle-Particle}.
+
+%Hablar de las características del problema: (explicar 2 o mas metodos)
+%-Poblacion inicial.
+%-Metodo de integracion.
+%-Metodo calculo fuerza.
+
+%Estado del Arte
+
+% Criticar soluciones existentes, no agresivamente.
+% 	Analisis -> Criterio (que usaremos para analizar nuestro propio trabajo)
+% 	Definir criterios de evaluación.
+% 	Explicar lo que implica y por que son importantes.
+
+% Introduccion del estado del arte explicando enfoque
+
+% formula de calculo de fuerza
+
+% Explicación de métodos para calculo fuerza
+

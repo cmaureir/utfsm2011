@@ -1,0 +1,246 @@
+% explicación general del algoritmo y las diferencias
+% de ambas implementaciones
+
+The used algorithm is the more simplest
+way to implement a \emph{Particle-Particle}
+approach to the \emph{n-body} problem,
+i.e. we will have a main loop, with a certain
+time-steps, and inside we will update the
+particles attributes, like the ``position'',
+``acceleration'' and ``velocities''.
+
+The main characteristics,
+is that is a fine-grained algorithm,
+it means, perform a lot of small
+mathematical calculation, several times,
+instead of a big task.
+
+In pseudo-code, the algorithm idea will be
+as follows:
+
+\begin{center}
+\begin{algorithmic}
+\STATE $updateAccelerations()$
+\FOR {$counter = 0 \to iterations$}
+    \STATE $updatePositions()$
+    \STATE $updateAccelerations()$
+    \STATE $updateVelocities()$
+\ENDFOR 
+\end{algorithmic}
+\end{center}
+
+After a serial implementation profiling,
+we can note that almost all the execution time ($98\%$)
+is in the \emph{updateAccelerations()} function,
+because inside we have a line which use a \texttt{math.h}
+function called \emph{sqrt()}.
+
+So the main goal will be optimize that function,
+to optimize the execution time of our \emph{n-body} problem
+implementation.
+
+\subsection{OpenMP Implementation}
+ 
+The main idea behind the OpenMP implementation
+is to use the most important characteristic of this approach,
+the simplicity.
+
+When we use OpenMP, we are looking for a quick
+optimization to our code, in this example,
+after the profiling, we note that all the execution
+time was in the \texttt{updateAcceleration()} function,
+so we need to optimize that code portion.
+
+So, the simplest way to optimize a \emph{for} loop,
+will be to add a \texttt{\#pragma omp parallel for},
+and works, but in this case, we have a nested \emph{for} loop,
+inside another loop, so the previous pragma will not work.
+
+One of the OpenMP characteristics to solve this issue,
+is to privatize variables, that can be done in different ways,
+for example:
+
+\begin{itemize}
+    \item \texttt{private(i)}:
+            A \emph{private} variable means that the value is not dependent on any other thread,
+            so each thread will have a copy of the variable.
+            The internal behaviour is:
+            \begin{itemize}
+                \item Create new object of the same type in each thread,
+                \item The references to the original object are replaces by the new one,
+                \item We assume that the variable are uninitialized,
+            \end{itemize}    
+    
+    \item \texttt{firstprivate(i)}:
+            A \emph{firstprivate} variable is very similar to the \emph{private} variable,
+            but provides an automatic initialization of the variables, according to the
+            original value, before enter in the parallel section.
+
+    \item \texttt{lastprivate(i)}:
+            A \emph{lastprivate} variable is very similar to the \emph{firstprivate} but
+            the value of the variable is from the last loop iteration.
+            So the last value is copied back into the original variable.
+\end{itemize}
+
+In this case, we use the \texttt{private} OpenMP variable to the second
+counter ($j$), because we need to each $i$-thread has a self $j$ counter
+to calculate the force on a single body.
+
+Finally, the code was programmed as follows:
+
+\begin{lstlisting}[style=C]
+void updateAccelerations(){
+    int i,j;
+    for (i = 0; i < n; i++) {
+        bodies[i].ax = bodies[i].ay = bodies[i].az = 0;
+    }
+    #pragma omp parallel for private(j)
+    for (i = 0; i < n; i++) {
+        for(j=0; j<n; j++){
+            if(j != i){
+                accelerationCalc(i,j);
+            }
+        }
+    }
+}
+\end{lstlisting}
+
+You can note, that the only modification is only the
+pragma line, and internally, OpenMP will distribute and
+synchronize all the threads in the CPU's of the computers,
+which is good is we are looking for quick programming
+optimization, but not enough good if we like to
+handle the synchronization by our-self, avoiding all the
+possible overhead of the threads call.
+
+We do not use critical sections,
+because we do not have shared variables
+in each iteration, or loop dependencies.
+
+\subsection{Pthreads Implementation}
+
+Using POSIX threads, we have more low level control
+to the threads itself, instead the OpenMP approach.
+
+In this case, we write the code thinking in obtain
+the best results, using the CPU in a very efficient way.
+This can be possible, because we perform an operation
+between the amount of bodies and the number of cores,
+so we distribute equally in each core a set of bodies,
+in other words, we are change the algorithm grain,
+from a ``fine'' to ``coarse'', grouping bodies
+calculations.
+
+As the calculation of the force on every body
+depends of all the others bodies, we do not have
+a calculation dependence, because we modify only the acceleration
+using the position and mass of the other bodies,
+so is not necessary to use \texttt{mutex} to avoid
+data corruption or errors.
+
+\begin{lstlisting}[style=C]
+void updateAccelerations(){
+    int i;
+
+    for (i = 0; i < n; i++) {
+        bodies[i].ax = bodies[i].ay = bodies[i].az = 0;
+    }
+    int bound = n/cores;
+    for (i = 0; i < cores; i++) {
+        threads[i].ini = i * bound;
+        threads[i].end = threads[i].ini + bound;
+        pthread_create(&threads[i].thread, NULL , accelerationCalc, (void *)&threads[i]);
+    }
+
+    for(int j=0 ; j < cores ; ++j){
+        pthread_join(threads[j].thread, NULL);
+    }
+
+}
+\end{lstlisting}
+
+The previous Pthreads implementation follows three simple steps:
+
+\begin{itemize}
+    \item Calculate the bodies bound (per each core),
+    \item Execute the \emph{accelerationsCalc()} function, per each thread (considering an amount of bodies).
+    \item Join all the threads, and wait for his end.
+\end{itemize}
+
+Finally, we obtain a little more complicated approach to the parallelism,
+having more control to the threads synchronization and execution,
+but we are taking advantage of OpenMP, because the change from
+\emph{fine-grained} to \emph{coarse-grained} because is more appropriate
+to a CPU parallelization approach, to use the most resources that
+we can obtain for each core.
+
+\subsection{CUDA Implementation}
+
+The GPU based implementation, using CUDA,
+can be more complicated because is in essence C++,
+but with some extra statements to handle the
+differentiation between \emph{Device} and \emph{Host} functions,
+which execute into the GPU and in the CPU respectively.
+
+There are several research arround this direct method implementation
+using CUDA, like the work of Belleman et al.~\cite{cuda1},
+obtained good results, also, people from Nvidia
+use this problem as a toy algorithm to try the power of GPU,
+an example can be found in \cite{cuda2}.
+
+The main idea of the implementation is the same,
+but the only difference is that we have 240 cores (1.3 GHz),
+instead of the 16 cores in the CPU (2.27 Ghz),
+which give us a great scenario for a fine-grained algorithm.
+
+The main kernel call is very simple,
+besides the number of \emph{blocks per grid}
+and the number of \emph{threads per block},
+we need the main bodies array (\texttt{bodies}), the iteration variable (\texttt{iter}),
+the time step in each iteration (\texttt{dt}) and the total of bodies (\texttt{N}). 
+
+\begin{lstlisting}[style=C]
+ nbody<<< blockNum, threadsPerBlock >>> (bodies,iter,dt,N);
+\end{lstlisting}
+
+The kernel implementation,
+is based on the idea of separate each function
+in a different \emph{device function},
+so we have the need to synchronize all the used
+threads after each device function call.
+
+The following code, represent the CUDA implementation
+based on the main pseudo-code idea.
+
+\begin{lstlisting}[style=C]
+__global__ void nbody(particle *bodies,float iter, float dt, int N){
+    reset_accelerations(bodies,N);
+    __syncthreads();
+    update_accelerations(bodies, N);
+    __syncthreads();
+    
+    for (float t = 0.0; t < iter; t += dt){
+    
+        update_positions(bodies,dt,N);
+        __syncthreads();
+
+        reset_accelerations(bodies,N);
+        __syncthreads();
+
+        update_accelerations(bodies,N);
+        __syncthreads();
+    
+        update_velocities(bodies,dt,N);
+        __syncthreads();
+    }
+\end{lstlisting}
+
+We take advantage with this implementation,
+because the GPU is physically designed
+to work with several small calculation
+in all the cores, base idea of the graphical
+computation.
+
+We use the idea of, \emph{one-thread}
+means \emph{one-body}, which is different
+to the previous implementations.

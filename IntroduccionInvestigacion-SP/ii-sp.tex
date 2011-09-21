@@ -1,43 +1,105 @@
 \documentclass[letter, 10pt]{IEEEtran}
 %\documentclass[letter, 10pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel}
+%\usepackage[english]{babel}
 \usepackage{amsfonts}
+\usepackage{algorithmic}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{url}
+\usepackage{listings}
 \usepackage{hyperref}
 %\usepackage[top=3cm,bottom=3cm,left=3.5cm,right=3.5cm,footskip=1.5cm,headheight=1.5cm,headsep=.5cm,textheight=3cm]{geometry}
+\usepackage{color}
+\definecolor{gray97}{gray}{.97}
+\definecolor{gray75}{gray}{.75}
+\definecolor{gray45}{gray}{.45}
+\lstset{ frame=Ltb,
+     framerule=0pt,
+     aboveskip=0.2cm,
+     framextopmargin=3pt,
+     framexbottommargin=3pt,
+     framexleftmargin=0.1cm,
+     framesep=0pt,
+     rulesep=.3pt,
+     backgroundcolor=\color{gray97},
+     rulesepcolor=\color{black},
+     %
+     stringstyle=\ttfamily,
+     showstringspaces = false,
+     basicstyle=\scriptsize\ttfamily,
+     commentstyle=\color{gray45},
+     keywordstyle=\bfseries,
+     %
+%     numbers=left,
+%     numbersep=12pt,
+%     numberstyle=\tiny,
+%     numberfirstline = false,
+     breaklines=true,
+   }
+
+% minimizar fragmentado de listados
+\lstnewenvironment{listing}[1][]
+   {\lstset{#1}\pagebreak[0]}{\pagebreak[0]}
+
+\lstdefinestyle{consola}
+   {basicstyle=\scriptsize\bf\ttfamily,
+    backgroundcolor=\color{gray75},
+   }
+
+\lstdefinestyle{C}
+   {language=C,
+   }
+
+
 
 
 \begin{document}
-%\bibliographystyle{plain}
 \pagestyle{empty}
 
-\title{Introducción a la Investigación \\ \begin{Large}``El problema de los n-cuerpos''\end{Large}}
+\title{An approach to the n-body problem solution using the particle-particle scenario in Multi and Many-cores}
 \author{Cristián D. Maureira Fredes\\\url{cmaureir@csrg.cl}}
 \date{\today}
 
 \maketitle
 \begin{abstract}
-Lorem ipsum\\
-{\bf Keywords: } ala, lele
+In the present work, is described a parallel programming
+comparison, between Many and Multi core scenario,
+focused on the widely know \emph{n-body} problem.
+We present an state of art of the main approaches to
+the problem force calculation and finally
+we show the obtained results of the three different
+parallel programming approaches with the pros and cons
+of each implementation.
+\\
+\textbf{Key words:} Parallel Algorithms, OpenMP, Pthreads, CUDA, n-body
+
 \end{abstract}
 
+\section{Introduction}
+\label{introduction}
+\input{src/introduction}
 
 
-\section{Introducción}
-\label{sec:introduccion}
-\input{src/introduccion}
+\section{N-body details}
+\label{nbody-details}
+\input{src/nbody-details}
 
-\section{Estado del arte}
-\label{sec:estado_arte}
-\input{src/estado_arte}
 
-\section{Conclusiones}
-\label{sec:conclusiones}
-\input{src/conclusiones}
+\section{Algorithm approach}
+\label{algorithm}
+\input{src/algorithm}
 
-\section{Bibliografía}
-%\bibliography{informe}
+
+\section{Experimental Results}
+\label{experimental}
+\input{src/experimental}
+
+\section{Conclusions and Future Work}
+\label{conclusions}
+\input{src/conclusions}
+
+\bibliographystyle{splncs03}
+\bibliography{ii-sp}
+
 \end{document} 

@@ -1,0 +1,27 @@
+In the present work, we describe a benchmark
+of the particle-particle n-body algorithm,
+using different many and multi-core scenarios,
+with different techniques to take some advantage
+in each case.
+
+The previous work, showed a more programming vision
+of the worst computational method of the \emph{n-body} problem,
+considering only a high speed-up as a main issue,
+without think in change the other important aspects
+of this problem, like the integration method and
+the initial population generation.
+
+Most of the done work,
+take only one or two computational approach,
+considering CPU or GPU cores to perform the calculation,
+but it is very important the fact that a good programming
+in CPU can reach not the entire GPU speed-up, but a good
+approximation, modifying the behind idea of the CPU implementation,
+because in some implementation, the programmer forgot the strength
+of a CPU-thread, which compared to a GPU-thread is more computationally strong.
+
+Finally, is important to note that this three implementations
+are basic ones, so, it is very possible to start a research to improve
+the code, specially the CUDA implementation, because with some better
+manipulation of the GPU memory, we could obtain more than the double
+of the obtained speed-up.

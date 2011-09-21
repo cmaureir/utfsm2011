@@ -1,0 +1,259 @@
+% aproximaciones para resolver el problema
+
+%\subsection{Particle-Particle (PP)}
+
+%This approach is the simplest way to address
+The Particle-Particle (PP) method is the simplest wat to address
+the task of calculating the exerted force by all the bodies on a single body.
+
+Broadly, the method consists of:
+\begin {itemize}
+	\item Collect forces on a given particle (using the previous indicated formula).
+	\item Integrate the motion equations.
+	\item Update the counter.
+	\item Repeat the process.
+\end {itemize}
+
+Note that the process in which the equations are solved,
+consists of two first order differential equations,
+to calculate the acceleration and speed,
+and also uses an integration method for new positions and
+velocities of the bodies.
+
+As this is the simplest scenario,
+we realize that the process is of order $O(n^{2})$,
+so for any algorithm, not a desirable scenario.
+
+Since this initial solution, completely theoretical,
+without any improvement, any text that refers integration methods will be useful,
+but is also convenient to use simulation references,
+as is the work of Gould and Tabochnik~\cite{methods}.
+
+%%%
+
+This work will consider only an implementation
+of the PP method, but is important to clarify
+that there was other approximations more efficient
+like the Particle-Method (PM) method,
+which present a to $O(n + ng\log ng)$ order,
+(ng: amount of the used vertex);
+with $O(n\log n)$ algorithm order.
+Other algorithm, is the model proposed by Barnes \& Hut~\cite{treecode} in 1986,
+called Tree Code, offering a $O(n\log n)$ algorithm for the force
+calculation.
+To the point reached by the TC algorithms,
+which have been studied to obtain a good performance
+on GPU clusters, making it a typical test case
+in order to obtain excellent performances,
+allowing to have been winners of several awards,
+as the case Hamada et al.~\cite{hamada},
+which was awarded the Gordon Bell prize~\footnote{\url{http://awards.acm.org/bell/}}
+several times, obtaining in one of his last work
+190 TFlops using TC algorithms to solve the \emph{n-body} problem.
+Finally, the \emph{Fast Multipole Method} is one of the methods
+mostly used, for its low complexity and provides high accuracy,
+being proposed by Leslie Greengard in his doctoral thesis~\cite{leslie},
+this algorithm is known to propose an order usually of $O(n)$.
+
+%%%
+
+
+%\subsection{Particle-Mesh (PM)}
+%
+%This method generates a mesh in all the space where we have bodies,
+%thus seeking to obtain the approximate force at different points in the mesh.
+%
+%In addition, the last method differential operators are replaced by
+%finite difference approximations, reducing the calculation,
+%since the force and potential of the positions of the bodies
+%are obtained by interpolation of the array of
+%the values of the mesh.
+%
+%Another important feature of the mesh, is that it defines a kind
+%of density, which are calculated by the exerted loads of every body
+%to a determinate mesh point.
+%
+%Broadly, the method consists of:
+%\begin{itemize}
+%    \item Assign the load to the mesh, taking into account the relationship between
+%          body mass and mesh density.
+%    \begin{itemize}
+%        \item The best way is when bodies are varied
+%              nearby, to reduce force fluctuations.
+%    \end{itemize}
+%    \item Solve the force equation field on the mesh,
+%          which can be solved using Poisson's equation: $\delta^{2}(\phi) = 4\cdot\pi\cdot G\cdot \rho$.
+%    \item Calculate the force field from the potential of the mesh.
+%    \item Interpolate the force on the mesh to determine the forces
+%          on their bodies.
+%    \item Integrate forces to obtain the new bodies positions and velocities.
+%    \item Update counter.
+%    \item Repeat the process.
+%\end{itemize}
+%
+%This method presents a more quick calculation, in comparison to the \emph{Particle-Particle} method,
+%decreasing of the same way the algorithm order, to $O(n + ng\log ng)$,
+%where $ng$ is a amount of mesh vertex.
+%
+%A key problem, is the complexity caused to solve a Poisson equation,
+%besides not being a recommended model in cases in which we like to study
+%the bodies collision, because we approximate groups of bodies in
+%some mesh vertex.
+%
+%Because the PM model is a model that takes quite a while as a available
+%tool to scientists and researchers, has plenty of room to give rise to new research,
+%such as the work of Villumsen~\cite{Villumsen}, who proposes
+%a new PM scheme based on hierarchy, which differs from the initial scheme,
+%since the Poisson equation is solved using FFT methods,
+%in cubic mesh, considering a tree structure,
+%which is clearly based its structure TC algorithms.
+%
+%On the other hand, there have been computationally more realistic models,
+%such as working Pen~\cite{pen}, where presents a PM model, 
+%but with the difference that it uses a dynamic coordinate system
+%which is dynamic auto-adapted according to the distribution of bodies density,
+%becoming an early rapid resolution in the field of n-body algorithms.
+%
+%
+%\subsection{Treecodes (TC)}
+%
+%This model was proposed by Barnes \& Hut~\cite{treecode} in 1986,
+%and today remains one of the most widely used base models,
+%because from this mechanism, many researchers have made minor
+%modifications to obtain either a lower or less run time order
+%of the algorithm.
+%
+%The method is based on the simple idea that when you have a certain
+%number of bodies far enough, you can approach them all into one single body,
+%determining its position from the center of mass, obtaining a great body,
+%instead of several dispersed.
+%
+%Besides being a brilliant scheme to group the distant bodies,
+%is divided recursively all the bodies in a structure called \emph{quad-tree}
+%in two dimensions, and \emph{oct-tree} in three dimensions, which are similarly
+%represented as a tree, inserting the idea that the root of the tree represents
+%the entire space, and adding childrenis, these represent divisions
+%within the space where they are.
+%Finally we can say that every external node
+%will represent a single body, while the internal,
+%the group of bodies representing approximate.
+%
+%The procedure for calculating the force on a body is:
+%\begin{itemize}
+%    \item We travel all nodes in the tree,
+%    \begin{itemize}
+%        \item If is an external node, we use the same idea of the \emph{Particle-Particle} approach.
+%        \item If is an internal node,
+%        \begin{itemize}
+%            \item If is far enough, we use the approach.
+%                  To determine if the body is far enough,
+%                  it used a ratio between the region width where is the
+%                  node and the distance to the center of mass from this body.
+%                  This ratio compares with a threshold that will give us the answer.
+%            \item If is not far enough, we enter the sub-trees.
+%            \item Repeat the process
+%        \end{itemize}
+%    \end{itemize}
+%\end{itemize}
+%
+%The procedure to construct the tree, i.e., enter a new $b$ body in the tree,
+%rooted in a $x$ node, consists of:
+%\begin{itemize}
+%    \item If $x$ does not have a body, $b$ is entered in that position.
+%    \item If $x$ is an internal node, we update the center of mass and total mass.
+%          (Recursion, until it is not an internal node).
+%    \item If $x$ is an external node, and contains a $c$ node,
+%          as there would be two bodies in the same region,
+%          we need to subdivide recursively until both bodies
+%          will be located in different regions.
+%\end{itemize}
+%
+%The main plus point,
+%is that the forces on all bodies are obtained by operations
+%with $O(n\log n)$ order.
+%
+%The problem is that you lose accuracy approximating the bodies (far enough)
+%into a single one.
+%
+%After the first approach of TC algorithms,
+%some researchers began to improve certain aspects
+%in which efficiency was not very favorable,
+%as in the work of Jernigan et al.~\cite{jernigan},
+%which is the main approach to handle the
+%generated error by TC algorithms,
+%setting limits to keep the energy conservation law
+%in the bodies.
+%
+%To the point reached by the TC algorithms,
+%which have been studied to obtain a good performance
+%on GPU clusters, making it a typical test case
+%in order to obtain excellent performances,
+%allowing to have been winners of several awards,
+%as the case Hamada et al.~\cite{hamada},
+%which was awarded the Gordon Bell prize~\footnote{\url{http://awards.acm.org/bell/}}
+%several times, obtaining in one of his last work
+%190 TFlops using TC algorithms to solve the \emph{n-body} problem.
+%
+%\subsection{Multipole methods}
+%
+%The \emph{Fast Multipole Method} is one of the methods
+%mostly used, for its low complexity and provides high accuracy,
+%being proposed by Leslie Greengard in his doctoral thesis~\cite{leslie}.
+%
+%Broadly speaking, is a \emph{Treecode} which use
+%two representations of the potential field,
+%which are a far field, it would be a \emph{multipole}
+%and local expansions.
+%
+%Since this method uses a quick calculation of the potential field,
+%it is very easy to make the computationally procedure,
+%compared to the force calculation, being this last one
+%a vector which is contrary to the scalar which is the potential $(\phi (x, y, z))$.
+%Here it is necessary to remember a basic physical equivalence,
+%where the force can be represented as the negative potential gradient.
+%
+%$$F = - \nabla P$$
+%
+%The method strategy is to calculate an small expression
+%for the potential, using multipole expansions, which
+%resemble a Taylor expansion,
+%with high accuracy when its get bigger values
+%from the expression $x^{2}+y^{2}+z^{2}$.
+%
+%As mentioned above,
+%this method shares the idea of tree,
+%from the \emph{Treecode} method
+%but differs in the following aspects:
+%
+%\begin{itemize}
+%    \item This method calculates the potential at all points,
+%          not force, as does \emph{Treecode}.
+%    \item This method uses more information than the mass
+%          and the center of the particles in a region, as being
+%          a more precisely expansion, their complexity grows.
+%    \item The decision whether a region (bodies set) is used or not
+%          as one body, depends only on the position and region size,
+%          not of the center of mass position of the region.
+%\end{itemize}
+%
+%Being a more accurate method has its cost,
+%which was demonstrated by McMillan et al.~\cite{mcmillan},
+%which mention is not a good model for studying system collisions because
+%it is slower compared to other methods and that has a constant time
+%when evaluating a number of particles force, with an order $O(1)$.
+%
+%However, this model is widely used for applications in which the bodies
+%have the same or similar time steps, when evaluating the motion equations.
+%
+%Although,
+%this algorithm is known to propose an order usually $O(n)$,
+%there is a work of Srinivas Aluru~\cite{srinivas},
+%which ensures that the algorithm does not have that order,
+%because is obtained only in the best case,
+%neglecting the analysis of worst-case scenario for the algorithm.
+%By analyzing each step of the algorithm,
+%since the construction of the tree,
+%where some constants defined by Greengard,
+%which Srinivas justify which is not possible,
+%concluding that the algorithm will behave
+%at least an order of $O(N \log^{2} N) $.
