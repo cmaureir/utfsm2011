@@ -41,51 +41,150 @@ Se pide:
 %
 % considerar el período de desfase para la inversión de capital de trabajo como 6 meses.
 %
-
+\newpage
 \begin{enumerate}[(a)]
 
     \item {\bf Proyección de Demanda (2012 - 2014) (8p)}
 
           \red{Respuesta:}
 
-          lorem ipsum
+          Considerando los valores de la demanda entre los años 2006 y 2010 señalados
+          en el enunciado, se procede a obtener los valores necesarios para obtener la ecuación
+          de proyección de demanda.
 
+          \begin{eqnarray}
+              y = b + a\cdot x 
+          \end{eqnarray}
+
+          Siendo, $y$ la demanda (variable dependiente), $x$ variable independiente,
+          $a$ el punto de intersección de la línea de regresión con el eje $Y$,
+          $b$ la pendiente de la línea de regresión.
+
+          Para calcular tanto $a$, como $b$ existen las siguientes fórmulas:
+
+          \begin{eqnarray}
+              b &=& \dfrac{\sum_{i=1}^{n} (x\cdot y) - n\cdot \bar{x}\cdot \bar{y}}{\sum_{i=1}^{n} x_{t}^{2} - n\cdot \bar{x}^{2}} \\
+              a &=& \bar{y} - b\cdot \bar{x} 
+          \end{eqnarray}
+
+          Podemos obtener los valores de las fórmulas de la siguiente forma:
+
+          \begin{table}[h!t]
+            \centering
+            \begin{tabular}{|c|r|r|r|r|r|}
+                \hline
+                {\bf Año}      & {\bf $x$} & {\bf $y$} & {\bf $x\cdot y$} & {\bf $x^{2}$} & {\bf $y^{2}$} \\ \hline
+                2006           & -2      & 60      & -120           & 4             & 3600          \\
+                2007           & -1      & 76      & -76            & 1             & 5776          \\
+                2008           & 0       & 88      & 0              & 0             & 7744          \\
+                2009           & 1       & 97      & 97             & 1             & 9409          \\
+                2010           & 2       & 111     & 222            & 4             & 12321         \\ \hline
+                {\bf Suma}     & 0       & 432     & 123            & 10            & 38850         \\ \hline
+                {\bf Promedio} & 0       & 86.4    & 24.6           &               &               \\ \hline
+            \end{tabular}
+          \end{table}            
+
+          Reemplazando valores en las fórmulas:
+    
+          \begin{eqnarray}
+              b &=& \frac{123 - 0}{10 - 0} \nonumber \\
+              b &=& 12.3  \\
+              a &=& 86.4 - 12.3\cdot 0 \nonumber \\
+              a &=& 86.4
+          \end{eqnarray}
+
+          Obtenemos finalmente la fórmula general:
+
+          \begin{eqnarray}
+              y = 12.3 + 86.4\cdot x 
+          \end{eqnarray}
+
+          Ahora es posible realizar la \emph{proyección de la demanda} entre los años 2012 y 2014.
+
+        
+          \begin{table}[h!t]
+            \centering
+            \begin{tabular}{|c|r|r|r|r|r|}
+                \hline
+                {\bf Año} & {\bf x} & {\bf y} & {\bf $\approx y$}\\ \hline
+                2012      & 4       & 135.6   & 136  \\
+                2013      & 5       & 147.9   & 148  \\
+                2014      & 6       & 160.2   & 161  \\ \hline
+            \end{tabular}
+          \end{table}            
+
+        \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                xlabel=$\text{Año} (x)$,
+                ylabel=$\text{Demanda} (y)$]
+            \addplot[smooth,mark=*,blue] plot coordinates {
+                (2006,60)
+                (2007,76)
+                (2008,88)
+                (2009,97)
+                (2010,111)
+                (2012,136)
+                (2013,148)
+                (2014,161)
+            };
+            \end{axis}
+        \end{tikzpicture}
+        \end{center}
+
+\newpage
     \item {\bf Tabla de Inversiones (6p)}
 
           \red{Respuesta:}
 
-          lorem ipsum
+        capital de trabajo
+            num desface /12  * egresos 1er año
+            1er año egreso = costo totales(60% ventas) + sueldos
+        capital fijo
+        capital intangible
 
+        
+
+\newpage
     \item {\bf Tabla de Depreciación (5p)}
 
           \red{Respuesta:}
 
-          lorem ipsum
+          deprec activo fijo 6,000,000  3 años
 
+\newpage
     \item {\bf Tabla de Amortización (6p)}
 
           \red{Respuesta:}
 
-          lorem ipsum
+          principal    amortizcion interes cyota
 
+        0 0.8 * x       
+        1              0.4x         A*0.05  sum <-
+        2              0.4x
+
+\newpage
     \item {\bf Flujo de Caja Financiado con un horizonte de evaluación de 3 años (20p)}
 
           \red{Respuesta:}
 
           lorem ipsum
 
+\newpage
     \item {\bf Indicadores Económicos  del Flujo de Caja Financiado (VAN, PAYBACK, TIR y TIRM) (10p)}
 
           \red{Respuesta:}
 
           lorem ipsum
 
+\newpage
     \item {\bf Realizar la sensibilización con las variables “ingreso” e “inversiones” (10p)}
 
           \red{Respuesta:}
 
           lorem ipsum
 
+\newpage
     \item {\bf Conclusiones, analizando detalladamente la información obtenida del flujo de caja y de los indicadores económico? (10p)}
 
           \red{Respuesta:}
