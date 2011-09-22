@@ -24,7 +24,6 @@ usted ha determinado que los costos operacionales totales serán de un 60\% de l
 En cuanto a las remuneraciones, se calcula que el total de las remuneraciones brutas para
 el primer año es de \$3.500.000, siendo el aumento real anual de las remuneraciones de un 2\%. 
 
-
 La inversión en capital fijo (depreciable) es \$6.000.000 netos, con vida útil normal según SII de 3 años.
 Considerar que se deprecian linealmente, y que no hay reinversiones en el horizonte de evaluación.
 Por otro lado, la inversión en intangibles (formación de sociedad, gastos de puesta en marcha, marketing, etc.),
@@ -35,12 +34,9 @@ es de un 80\% de la inversión con crédito externo al 5\%, con amortizaciones i
 El horizonte de evaluación es de 3 años y una tasa de descuento del 15\%.
 La empresa piensa cerrar en el horizonte del proyecto, y no considera vender los activos.
 
+\textbf{Nota:} Considerar el período de desfase para la inversión de capital de trabajo como 6 meses.
+
 Se pide:
-
-
-%
-% considerar el período de desfase para la inversión de capital de trabajo como 6 meses.
-%
 \newpage
 \begin{enumerate}[(a)]
 
@@ -88,9 +84,9 @@ Se pide:
     
           \begin{eqnarray}
               b &=& \frac{123 - 0}{10 - 0} \nonumber \\
-              b &=& 12.3  \\
+                &=& 12.3  \\
               a &=& 86.4 - 12.3\cdot 0 \nonumber \\
-              a &=& 86.4
+                &=& 86.4
           \end{eqnarray}
 
           Obtenemos finalmente la fórmula general:
@@ -100,7 +96,6 @@ Se pide:
           \end{eqnarray}
 
           Ahora es posible realizar la \emph{proyección de la demanda} entre los años 2012 y 2014.
-
         
           \begin{table}[h!t]
             \centering
@@ -111,6 +106,8 @@ Se pide:
                 2013      & 5       & 147.9   & 148  \\
                 2014      & 6       & 160.2   & 161  \\ \hline
             \end{tabular}
+            \caption{Proyección de la demanda}
+            \label{tab:demanda}
           \end{table}            
 
         \begin{center}
@@ -137,39 +134,122 @@ Se pide:
 
           \red{Respuesta:}
 
-        capital de trabajo
-            num desface /12  * egresos 1er año
-            1er año egreso = costo totales(60% ventas) + sueldos
-        capital fijo
-        capital intangible
+        Del enunciado podemos obtener el valor de la inversión del \emph{capital fijo} y \emph{capital intangible},
+        pero es necesario obtener la inversión del \emph{capital de trabajo}, utilizando la siguiente fórmula:
 
-        
+        \begin{eqnarray}
+            \text{Inversión Capital Trabajo} &=& \frac{\text{Periodo de desfase}}{\text{12 meses (1 año)}} \cdot \text{Egresos primer año}
+        \end{eqnarray}
 
-\newpage
+        De la misma forma,
+        los \emph{egresos del primer año} se pueden obtener sumando los \emph{costos operacionales totales} mas las \emph{remuneraciones}.
+        \begin{eqnarray}
+            \text{Egresos primer año} &=& \text{Costos operacionales totales} \cdot \text{Remuneraciones} \\
+                                      &=& 0.6\cdot  \text{Ventas} \cdot \text{Remuneraciones} \nonumber \\
+                                      &=& 12476000 \nonumber
+        \end{eqnarray}        
+        Por lo tanto la \emph{inversión de capital de trabajo} es de $\$6,238,000$.
+
+        Quedando así las siguientes inversiones:
+
+        \begin{table}[h!t]
+            \centering
+            \begin{tabular}{|l|r|}
+                \hline
+                {\bf Inversión }   & {\bf Monto} \\ \hline
+                Capital de Trabajo & \$6,238,000     \\ \hline
+                Capital Fijo       & \$6,000,000     \\ \hline
+                Capital Intangible & \$1,500,000     \\ \hline
+                {\bf Total inversión primer año} & \$13,738,000 \\\hline
+            \end{tabular}
+            \caption{Tabla de inversiones}
+            \label{tab:inversiones}
+        \end{table}
+
     \item {\bf Tabla de Depreciación (5p)}
 
           \red{Respuesta:}
 
-          deprec activo fijo 6,000,000  3 años
+          Considerando un capital fijo de $\$6,000,000$,
+          y aplicando una depreciación lineal,
+          con una vida útil de 3 años, podemos establecer lo siguiente.
+
+          \begin{table}[h!t]
+            \centering
+            \begin{tabular}{|c|r|r|}
+                \hline
+                {\bf Periodo} & {\bf Depreciación} & {\bf Valor activo} \\\hline
+                0 & - & 6,000,000 \\\hline
+                1 & 2,000,000  & 4,000,000  \\\hline
+                2 & 2,000,000  & 2,000,000  \\\hline
+                3 & 2,000,000  & 0  \\\hline
+            \end{tabular}
+            \caption{Tabla de depreciación}
+            \label{tab:depreciacion}  
+          \end{table}
 
 \newpage
     \item {\bf Tabla de Amortización (6p)}
 
           \red{Respuesta:}
 
-          principal    amortizcion interes cyota
+        Considerando la información entregada en el enunciado,
+        que señala que el financiamiento con crédito externo
+        es sólo el 80\% de la inversión total,  con un interés de 5\%
+        y utilizando el enfoque de amortización igual en 2 años,
+        podemos obtener los siguientes datos:
 
-        0 0.8 * x       
-        1              0.4x         A*0.05  sum <-
-        2              0.4x
+        \begin{eqnarray}
+            \text{Principal inicial} &=& \text{Inversión total}\cdot 0.8 \\
+                                     &=& 10990400 \nonumber \\
+            \text{Amortización fija} &=& \dfrac{\text{Principal inicial}}{\text{periodo de duración}} \\
+                                     &=& \dfrac{10990400}{2} \nonumber \\
+                                     &=& 5495200 \nonumber 
+        \end{eqnarray}
+
+        Además, se irá actualizando la tabla considerando que:
+
+        \begin{eqnarray}
+            \text{Interés} &=& \text{Principal}\cdot 0.05 \\
+            \text{Cuota}   &=& \text{Amortización fija} + \text{Interés} 
+        \end{eqnarray}
+
+        \begin{table}[h!t]
+            \centering
+            \begin{tabular}{|c|c|c|c|c|}
+                \hline
+                {\bf Periodo} & {\bf Principal }   & {\bf Amortización} & {\bf Interés} & {\bf Cuota} \\\hline
+                0             & 10990400           &        -           & -                  & -      \\\hline
+                1             & 5495200            &  5495200           & 549520             & 6044720\\\hline
+                2             & 0                  &  5495200           & 274760             & 5769960\\\hline
+            \end{tabular}
+            \caption{Tabla de Amortización}
+            \label{tab:amortizacion}          
+        \end{table}
+
+
+
 
 \newpage
     \item {\bf Flujo de Caja Financiado con un horizonte de evaluación de 3 años (20p)}
 
           \red{Respuesta:}
 
-          lorem ipsum
-
+            \begin{table}[h!t]
+                \begin{tabular}{|l|r|r|r|r|}
+                    \hline
+                    {\bf Item}                            & {\bf Año 0} & {\bf Año 1 } & {\bf Año 2} & {\bf Año 3} \\ \hline
+                    {\bf Ingresos (+)}                    &             &              &             & \\\hline
+                    {\bf Egresos (-)}                     &             &              &             & \\\hline
+                    {\bf Utilidades antes de impto (=)}   &             &              &             & \\\hline
+                    {\bf Impuestos 17\% (-)}              &             &              &             & \\\hline
+                    {\bf Utilidades después de impto (=)} &             &              &             & \\\hline
+                    {\bf Inversión (-)}                   &             &              &             & \\\hline
+                    {\bf Flujo de Caja }                  &             &              &             & \\\hline
+                    
+                \end{tabular}
+                
+            \end{table}
 \newpage
     \item {\bf Indicadores Económicos  del Flujo de Caja Financiado (VAN, PAYBACK, TIR y TIRM) (10p)}
 
