@@ -59,11 +59,25 @@
 \begin{center}
     \begin{tabular}{|c|c|}
         \hline
-        \textbf{Implementation} & \textbf{Velocity} \\\hline
+        \textbf{Implementation} & \textbf{Speed-up} \\\hline
         Serial  & 1x  \\\hline
         OpenMP  & 3x  \\\hline
         Pthread & 11x \\\hline
         CUDA    & 18x \\\hline
     \end{tabular}
 \end{center}
+}
+
+\frame
+{
+\frametitle{Results}
+\framesubtitle{Conclusions}
+
+\begin{itemize}
+    \item<1-> Importance of \red{granularity}.
+    \item<2-> Programming Cost \blue{vs} Computational Cost.
+    \item<3-> GPU or CPU? \blue{Depends} of the algorithm.
+    \item<4-> Be \red{careful} with parallel thought!
+\end{itemize}
+
 }

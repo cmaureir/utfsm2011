@@ -14,6 +14,28 @@
 \end{frame}
 
 \begin{frame}[fragile]
+    \frametitle{Algorithm}
+    \framesubtitle{Profiling}
+     \begin{itemize}
+         \item Using \texttt{gprof}.
+     \end{itemize}
+     \begin{table}[h!t]
+        \centering
+        \scriptsize
+        \begin{tabular}{|c|c|c|c|c|}
+           \hline
+           {\bf \% Time } & {\bf self seconds} & {\bf calls} & {\bf total ms/call} & {\bf name} \\\hline
+             99.74   &  51.20   &  1002   &  51.10  & updateAccelerations() \\\hline
+              0.08   &   0.04   &  1001   &   0.04  & updateVelocities()\\\hline
+              0.02   &   0.01   &  1001   &   0.01  & updatePositions()\\\hline
+              0.00   &   0.00   &     1   &   0.00  & checkAndInit(int, char const**)\\\hline
+        \end{tabular}
+        \caption{Serial implementation, using 1024 bodies}
+     \end{table}
+\end{frame}
+
+
+\begin{frame}[fragile]
 \frametitle{Algorithm}
 \framesubtitle{OpenMP}
 \begin{lstlisting}[style=C]
@@ -25,9 +47,8 @@ void updateAccelerations(){
     #pragma omp parallel for private(j)
     for (i = 0; i < n; i++) {
         for(j=0; j<n; j++){
-            if(j != i){
+            if(j != i)
                 accelerationCalc(i,j);
-            }
         }
     }
 }
@@ -63,25 +84,50 @@ void updateAccelerations(){
 \frametitle{Algorithm}
 \framesubtitle{CUDA}
 \begin{lstlisting}[style=C]
-__global__ void nbody(particle *bodies,float iter, float dt, int N){
-    reset_accelerations(bodies,N);
-    __syncthreads();
-    update_accelerations(bodies, N);
-    __syncthreads();
-    
-    for (float t = 0.0; t < iter; t += dt){
-    
-        update_positions(bodies,dt,N);
-        __syncthreads();
+__device__ void update_accelerations(particle *d_bodies,int n){
 
-        reset_accelerations(bodies,N);
-        __syncthreads();
+    int i = threadIdx.x + blockDim.x * blockIdx.x;
+    int j;
 
-        update_accelerations(bodies,N);
+    if (i < n){
+        for(j=0; j<n; j++){
+            if(j != i)
+                accelerationCalc(i,j);
+        }
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Algorithm}
+\framesubtitle{CUDA}
+
+\begin{lstlisting}[style=C]
+  nbody<<< blockNum, threadsPerBlock >>> (d_bodies,ite,dt,n);
+  cudaThreadSynchronize();
+\end{lstlisting}
+
+\begin{lstlisting}[style=C]
+__global__ void nbody(particle *d_bodies,float ite, float dt, int n){
+
+    float t;
+    reset_accelerations(d_bodies,n);
+    __syncthreads();
+    update_accelerations(d_bodies, n);
+    __syncthreads();
+
+    for (t = 0.0; t < ite; t += dt){
+        update_positions(d_bodies,dt,n);
         __syncthreads();
-    
-        update_velocities(bodies,dt,N);
+        reset_accelerations(d_bodies,n);
+        __syncthreads();
+        update_accelerations(d_bodies,n);
+        __syncthreads();
+        update_velocities(d_bodies,dt,n);
         __syncthreads();
     }
+}
 \end{lstlisting}
 \end{frame}

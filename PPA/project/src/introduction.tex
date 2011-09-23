@@ -1,28 +1,23 @@
 \frame
 {
-\frametitle{Trabajo}
-\framesubtitle{Problema de n-cuerpos}
-\begin{block}{Definición}
-    Predecir el \underline{movimiento} de un grupo de \underline{objetos celestes},
-    que van \underline{interactuando} unos con otros gravitacionalmente.
+\frametitle{Work}
+\framesubtitle{\emph{n-body} problem}
+\begin{block}{Definition}
+    Predict the \underline{movement} of a \underline{celestial objects} group,
+    which are \underline{interacting} with each other \underline{gravitationally}.
 \end{block}
 }
 
 \frame
 {
-\frametitle{Trabajo}
-\framesubtitle{Simulación de n-cuerpos}
+\frametitle{Work}
+\framesubtitle{\emph{n-body} simulation}
 \begin{itemize}
-    \item Simulación de un sistema dinámico de partículas.
-    \item Aplicaciones
+    \item Dynamic simulation of a particle system.
+    \item Applications.
     \begin{itemize}
-        \item Formación de estructuras no lineales.
-        \begin{itemize}
-            \item Filamentos de galaxias.
-            \item Halos de galaxias.
-        \end{itemize}
-        \item Dinámica de ``Star clusters''.
-        \item Movimiento de planetas.
+        \item Fluid mechanics
+        \item Astrophysics
         \item etc.
     \end{itemize}
 \end{itemize}
@@ -31,18 +26,18 @@
 
 \frame
 {
-\frametitle{Trabajo}
-\framesubtitle{Algoritmo}
-Secciones críticas:
+\frametitle{Work}
+\framesubtitle{Algorithm}
+Critical sections:
 \begin{columns}
     \begin{column}{0.5\textwidth}
         \begin{itemize}
-            \item Posiciones iniciales.
+            \item Initial positions.
             \begin{itemize}
                 \item \red{Random.}
                 \item Plummer Model.
             \end{itemize}
-            \item Método de integración.
+            \item Integration method.
             \begin{itemize}
                 \item Euler.
                 \item \red{Leapfrog.}
@@ -54,7 +49,7 @@ Secciones críticas:
     \end{column}
     \begin{column}{0.5\textwidth}
         \begin{itemize}
-            \item Cálculo de las fuerzas.
+            \item Force calculation.
             \begin{itemize}
                 \item \red{Particle-Particle.} \blue{$O(n^2)$}
                 \item Particle-Mesh.  \blue{$O(n + ng\log ng)$}
@@ -70,24 +65,21 @@ Secciones críticas:
 
 \frame
 {
-\frametitle{Trabajo}
-\framesubtitle{Algoritmo}
+\frametitle{Work}
+\framesubtitle{Algorithm}
 
 \begin{itemize}
-    \item Cálculo de la fuerza.
+    \item Force calculation.
     \begin{itemize}
-        \item Posiciones iniciales $x_i$.
-        \item Velocidades iniciales $v_i$.
+        \item Initial positions $x_i$.
+        \item Initial velocities $v_i$.
         \item $1 \leq i \leq N$
     \end{itemize}
     $$f_{ij} =G \cdot \frac{m_i \cdot m_j}{||r_{ij}||^{2}} \cdot \frac{r_{ij}}{||r_ij||}$$
     \begin{itemize}
-        \item $m_i$ y $m_j$ masas de los cuerpos $i$ y $j$.
-        \item $r_{ij} = (x_j - x_i )$ vector de distancia entre los cuerpos $i$ y $j$.
-        \item $G$, constante gravitacional. ($6,67428 \times 10^{-11} m^{3} kg^{-1} s^{-2}$)
+        \item $m_i$ and $m_j$ masses of the $i$ and $j$ bodies.
+        \item $r_{ij} = (x_j - x_i )$ distance vector between the $i$ and $j$ bodies.
+        \item $G$, gravitational constant. ($6,67428 \times 10^{-11} m^{3} kg^{-1} s^{-2}$)
     \end{itemize}
 \end{itemize}
 }
-
-
-

@@ -3,7 +3,7 @@
 %%% Lo que quieran aportar deben ser usuarios del TRAC
 
 \documentclass{beamer}
-\usepackage[spanish,activeacute]{babel}
+\usepackage[english,activeacute]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
 \usepackage{algorithmic}
@@ -56,7 +56,7 @@
      numberstyle=\tiny,
      numberfirstline = false,
      breaklines=true,
-	 emph = {[1]\_\_global\_\_,\_\_syncthreads,pthread\_create,pthread\_join,pragma,omp,parallel,private},
+	 emph = {[1]\_\_device\_\_,\_\_global\_\_,\_\_syncthreads,pthread\_create,pthread\_join,pragma,omp,parallel,private, threadIdx, blockDim, blockIdx,cudaThreadSynchronize},
 	 emphstyle={[1]\color{blue}},
    }
 
@@ -85,4 +85,7 @@
 \include{src/introduction}
 \include{src/algorithm}
 \include{src/results}
+\begin{frame}[t,plain]
+\titlepage
+\end{frame}
 \end{document}
