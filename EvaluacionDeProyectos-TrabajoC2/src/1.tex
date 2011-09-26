@@ -249,7 +249,7 @@ Se pide:
                     {    Intereses crédito (-)}              &               &    549,520.00 &    274,760.00 &               \\\hline
                     {\bf Utilidad antes impuesto (=)}        &               &{\bf-65,520.00}&{\bf 1,122,680.00} &{\bf 2,621,377.60} \\\hline
                     {    Impuestos 17\% (-)}                 &               &          0.00 &    190,855.60 &    445,634.19 \\\hline
-                    {\bf Utilidad despues impuesto (=)}      &               &{\bf-65,520.00}&{\bf 931,824.40}&{\bf 2,175,743.41} \\\hline
+                    {\bf Utilidad después impuesto (=)}      &               &{\bf-65,520.00}&{\bf 931,824.40}&{\bf 2,175,743.41} \\\hline
                     {    Depreciación (+)}                   &               &  2,000,000.00 &  2,000,000.00 &  2,000,000.00 \\\hline
                     {    Inversión (-)}                      & 13738000      &               &               &               \\\hline
                     {    Amortización (-)}                   &               &  5,495,200.00 &  5,495,200.00 &               \\\hline
@@ -266,20 +266,239 @@ Se pide:
 
           \red{Respuesta:}
 
-          lorem ipsum
+            \begin{itemize}
+                \item {\bf VAN}\\
+
+                    El Valor Actual Neto (VAN), nos permite poder determinar el valor presente, considerando un número de flujos de caja del futuro de un proyecto,
+                    originados por una inversión inicial.
+
+                    Para poder calcularlo, debemos utilizar la siguiente fórmula:
+
+                    \begin{eqnarray}
+                        \mbox{VAN} = \sum_{t=1}^n{\frac{V_t}{(1+k)^t}}- I_0
+                    \end{eqnarray}
+
+                    Siendo sus variables:
+                    \begin{itemize}
+                        \item $V_{t}$, flujos de caja del periodo $t$.
+                        \item $I_{0}$, valor de la inversión inicial.
+                        \item $n$, número de periodos considerados.
+                        \item $k$, tipo de interés.
+                    \end{itemize}
+
+                    El valor obtenido con los valores del flujo de caja de la pregunta anterior es:
+
+                    $$VAN = -\$885,410.62$$
+
+                \item {\bf PAYBACK}\\
+
+                    El PAYBACK se denomina también como plazo de recuperación,
+                    consiste en uno de los métodos de la selección estática,
+                    la cual consiste en poder tener una idea aproximada
+                    de lo que se tardará un proyecto en poder recuperar
+                    el desembolso inicial en el proyecto.
+
+
+                   En esencia, iremos verificando periodo a periodo el VAN, lo cual nos dirá si la cantidad obtenida
+                   es positiva o negativa. En caso de ser negativa, significa que no hemos  recuperado la inversión
+                   y análogamente, siendo positiva, hemos logrado recuperar la inversión.
+
+
+                   Los valores obtenidos para cada periodo, utilizando los resultados del flujo de caja fueron:
+
+                   \begin{table}[h!t]
+                        \centering
+                        \begin{tabular}{|c|c|}
+                            \hline
+                            {\bf Periodo} & Valor Payback \\\hline
+                            1 & -5,843,878.00 \\
+                            2 & -7,732,616.00 \\
+                            3 &   -885,411.00 \\ \hline
+                        \end{tabular}
+                   \end{table}
+
+                \item {\bf TIR}\\
+
+                    La Tasa Interna de Retorno (TIR), está definida como la tasa de interés necesaria para que el Valor Actual Neto (VAN) sea igual a cero.
+
+                    La fórmula para poder obtenerla es similar a la del VAN, sólo que ahora el valor $k$ será nuestra incógnita, es decir:
+
+                    \begin{eqnarray}
+                         VAN = \sum_{t=1}^n{\frac{F_{t}}{(1+TIR)^t}} -I = 0
+                    \end{eqnarray}
+
+                    El valor obtenido con los resultados del flujo de caja es de:
+            
+                    $$TIR = 0.0851 \approx 9\%$$
+
+                \item {\bf TIRM}\\
+
+                    La Tasa Interna de Retorno Modificada (TIRM), nace para poder acercar a la realidad el valor obtenido mediante la TIR,
+                    pues dicha tasa no nos entrega un valor muy preciso.
+
+                    La fórmula del TIRM está definida como:
+            
+                    \begin{eqnarray}
+                        TIRM = \sqrt[n]{\frac{VAN}{I_0}-1}\cdot (1 + k) -1 
+                    \end{eqnarray}
+
+                    Siendo sus variables:
+                    \begin{itemize}
+                        \item $VAN$, Valor Actual Neto.
+                        \item $I_{0}$, valor de la inversión inicial.
+                        \item $n$, número de periodos considerados.
+                        \item $k$, tipo de interés.
+                    \end{itemize}
+
+                    El valor obtenido utilizando el resultado del flujo de caja es:
+
+                    $$TIRM = 0.124 \approx 12\%$$
+            \end{itemize}
 
 \newpage
     \item {\bf Realizar la sensibilización con las variables “ingreso” e “inversiones” (10p)}
 
           \red{Respuesta:}
 
-          lorem ipsum
+          Para ambas sensibilizaciones, se ha considerado el siguiente rango de variación:
+          $-20\%, -10\%, -5\%, +5\%, +10\%. +20\%$.
+
+          Además, para medir la sensibilidad de las variables involucradas se utilizará
+          una medida $S$, dada por :
+          \begin{eqnarray}
+              S = \|\dfrac{VAN_{\text{nuevo}} - VAN_{\text{viejo}}}{VAN_{\text{viejo}}}\|
+          \end{eqnarray}
+          con la cual podemos  establecer las siguientes condiciones:
+
+          \begin{itemize}
+              \item $S > 1$, Proyecto {\bf muy} sensible al cambio de variable
+              \item $S < 1$, Proyecto {\bf poco} sensible al cambio de variable
+          \end{itemize}
+
+          \begin{itemize}
+              \item {\bf Ingresos}\\
+                \begin{table}[h!t]
+                    \centering
+                    \scriptsize
+                    \begin{tabular}{|c|r|r|r|r|r|r|}
+                        \hline
+                        {\bf Ingresos Año}   & -20\%           & -10\%           & -5\%            & +5\%            & +10\%           & +20\% \\\hline
+                        2012                 & \$11,968,000.00 & \$13,464,000.00 & \$14,212,000.00 & \$15,708,000.00 & \$16,456,000.00 & \$17,952,000.00 \\ \hline
+                        2013                 & \$14,065,920.00 & \$15,824,160.00 & \$16,703,280.00 & \$18,461,520.00 & \$19,340,640.00 & \$21,098,880.00 \\ \hline
+                        2014                 & \$16,525,555.20 & \$18,591,249.60 & \$19,624,096.80 & \$21,689,791.20 & \$22,722,638.40 & \$24,788,332.80 \\ \hline
+                        \hline
+                        {\bf Flujos de caja} & -20\%           & -10\%           & -5\%            & +5\%            & +10\%           & +20\% \\\hline
+                        Año 0                & -\$2,568,080.00 & -\$2,657,840.00 & -\$2,702,720.00 & -\$2,792,480.00 & -\$2,837,360.00 & -\$2,927,120.00\\\hline
+                        Año 1                & -\$4,362,576.00 & -\$3,961,648.00 & -\$3,761,184.00 & -\$3,360,256.00 & -\$3,159,792.00 & -\$2,758,864.00\\\hline
+                        Año 2                & -\$3,094,034.48 & -\$2,795,945.04 & -\$2,646,900.32 & -\$2,348,810.88 & -\$2,199,766.16 & -\$1,901,676.72\\\hline
+                        Año 3                & \$8,144,522.33  & \$9,279,132.87  & \$9,846,438.14  & \$10,981,048.68 & \$11,548,353.95 & \$12,682,964.49\\\hline
+                        \hline
+                        {\bf VAN }           & -\$3,346,003.29 & -\$2,115,706.96 & -\$1,500,558.79 & -\$270,262.46   & \$344,885.71    & \$1,575,182.04 \\\hline
+                        {\bf Sensibilidad}   & 2.78            & 1.39            & 0.69            & 0.69            & 1.39            & 2.78 \\\hline
+                    \end{tabular}
+                    \caption{Análisis sensibilidad Ingresos}
+                \end{table}
+                
+              \item {\bf Inversiones}\\
+                \begin{table}[h!t]
+                    \centering
+                    \scriptsize
+                    \begin{tabular}{|c|r|r|r|r|r|r|}
+                        \hline
+                        {\bf Inversión}      & -20\%           & -10\%           & -5\%            & +5\%            & +10\%           & +20\% \\\hline
+                        Capital Trabajo      & \$4,990,400.00  & \$6,113,240.00  & \$5,926,100.00  & \$6,549,900.00  & \$6,861,800.00  & \$7,485,600.00 \\\hline
+                        Capital Fijo         & \$4,800,000.00  & \$5,880,000.00  & \$5,700,000.00  & \$6,300,000.00  & \$6,600,000.00  & \$7,200,000.00 \\\hline
+                        Capital Intangible   & \$1,200,000.00  & \$1,470,000.00  & \$1,425,000.00  & \$1,575,000.00  & \$1,650,000.00  & \$1,800,000.00 \\\hline
+                        \hline
+                        {\bf Flujos de caja} & -20\%           & -10\%           & -5\%            & +5\%            & +10\%           & +20\% \\\hline
+                        Año 0                & -\$2,198,080.00 & -\$2,692,648.00 & -\$2,610,220.00 & -\$2,884,980.00 & -\$3,022,360.00 & -\$3,297,120.00\\\hline
+                        Año 1                & -\$2,351,776.00 & -\$3,439,825.60 & -\$3,258,484.00 & -\$3,862,956.00 & -\$4,165,192.00 & -\$4,769,664.00\\\hline
+                        Año 2                & -\$1,371,889.12 & -\$2,385,258.95 & -\$2,216,363.98 & -\$2,779,347.22 & -\$3,060,838.84 & -\$3,623,822.08\\\hline
+                        Año 3                & \$9,166,143.41  & \$10,288,983.41 & \$10,101,843.41 & \$10,725,643.41 & \$11,037,543.41 & \$11,661,343.41\\\hline
+                        \hline
+                        {\bf VAN }           & \$746,440.20    & -\$722,225.54   & -\$477,447.92   & -\$1,293,373.33 & -\$1,701,336.04 & -\$2,517,261.45 \\\hline
+                        {\bf Sensibilidad}   & 1.84            & 0.18            & 0.46            & 0.46            & 0.92            & 1.84 \\\hline
+                    \end{tabular}
+                    \caption{Análisis sensibilidad Inversiones}
+                \end{table}
+
+        \end{itemize}
+
+       \begin{center}
+       \begin{tikzpicture}
+           \begin{axis}[
+               xlabel=$\text{Porcentaje de variación ingresos}$,
+               ylabel=$\text{VAN}$]
+           \addplot[smooth,mark=*,blue] plot coordinates {
+               (-20,-3346003.29)
+               (-10,-2115706.96)
+               (-5,-1500558.79)
+               (0, 885410.62)
+               (+5,-270262.46)
+               (+10,344885.71)
+               (+20,1575182.04)
+           };
+           \end{axis}
+       \end{tikzpicture}
+       \end{center}
+
+       \begin{center}
+       \begin{tikzpicture}
+           \begin{axis}[
+               xlabel=$\text{Porcentaje de variación inversiones}$,
+               ylabel=$\text{VAN}$]
+           \addplot[smooth,mark=*,blue] plot coordinates {
+               (-20,746440.20)
+               (-10,-722225.54)
+               (-5,-477447.92)
+               (0, 885410.62)
+               (+5, -1293373.33)
+               (+10,-1701336.04)
+               (+20,-2517261.45)
+           };
+           \end{axis}
+       \end{tikzpicture}
+       \end{center}
 
 \newpage
     \item {\bf Conclusiones, analizando detalladamente la información obtenida del flujo de caja y de los indicadores económico? (10p)}
 
           \red{Respuesta:}
 
-          lorem ipsum
+          Del flujo de caja podemos decir, que el presente proyecto no es muy alentador en el sentido del tiempo
+          en comenzar a ver cifras positivas, luego de cada año de desarrollo, pues como se señala anteriormente
+          sólo en el tercer año tenemos un resultado positivo.
+
+          Aparte de los problemas de liquidez que pueden notarse a primera vista,
+          podemos también analizar la viabilidad del proyecto, las cuales
+          lamentablemente según el calculo del VAN, nos indica la inviabilidad del proyecto.
+
+          Considerando la sensibilización podemos decir que los ingresos son una variable
+          mucho más importante en el proyecto en relación a las inversiones,
+          lo cual tiene sentido, pues a cualquier proyecto le conviene tener más ingresos,
+          que a poder realizar una inversión más grande al principio del proyecto.
+          En ambos gráficos está reflejado el aumento y disminución del VAN en cada caso
+          de sensibilización, lo que nos lleva a concluir que sólo con un aumento
+          de los ingresos, podremos tener un VAN positivo, es decir, el proyecto
+          podría ser viable.
+
+          Observando los valores de los indicadores económico podemos señalar que el proyecto
+          no es recomendable, debido a que el VAN es negativo, por lo que debiese ser rechazado,
+          ya que la inversión produciría ganancias por debajo de la rentabilidad exigida.
+
+          El PAYBACK no hace más que aclarar las respuestas que se pueden obtener del VAN,
+          ya dentro del horizonte del proyecto, no podemos identificar un plazo de recuperación
+          a la inversión realizada.
+
+          Con el resultado del TIR, podemos darnos cuenta que de una tasa de 15\%,
+          debemos bajarla por lo menos hasta un 9\% para poder poseer un proyecto viable,
+          pero como bien sabemos, el TIR no representa muy bien la realidad,
+          por lo que con el resultado del TIRM nos damos cuenta que necesitamos una disminución
+          de 15\% a 12\% para que nuestro proyecto pueda ver la luz.
+
+          En términos generales, creo que el proyecto es bastante poco alentador,
+          sobre todo, pues he desarrollado una confianza al VAN, por los documentos leídos,
+          así que a penas calculé el VAN, me di cuenta que el proyecto no daría buenos resultados.
+           
 
 \end{enumerate}
