@@ -1,6 +1,6 @@
 \subsection{Hardware and Software Configuration}
 
-The details of the computer were the test was performed,
+The computer details where the test was performed,
 as the following.
 
 \begin{footnotesize}
@@ -60,7 +60,7 @@ Speed\  up\ =\ \frac{Serial\ Time}{Parallel\ Time} \\
 
 \subsubsection{OpenMP assessment}
 
-In the figure~\ref{fig:openmp} we can see the most representative speed-up of some
+In figure~\ref{fig:openmp} we can see the most representative speed-up of some
 amount of bodies.
 
 \begin{figure}[h!t]
@@ -71,7 +71,7 @@ amount of bodies.
 \end{figure}
 
 The difference between the amount of bodies is very big,
-and as the figure~\ref{fig:openmp} shows the behaviour in speed-up terms,
+and as figure~\ref{fig:openmp} shows the behaviour in speed-up terms,
 is very similar, which represents that the OpenMP implementation works
 in the same way, almost independent of the amount of bodies, which is not
 a good scenario in this simulation, because it is expected an evolution
@@ -83,7 +83,7 @@ a x3 speed-up.
 
 \subsubsection{Pthreads assessment}
 
-In the figure~\ref{fig:pthread} we can see the most representative speed-up of some
+In figure~\ref{fig:pthread} we can see the most representative speed-up of some
 amount of bodies.
 
 \begin{figure}[h!t]
@@ -99,7 +99,7 @@ we can give more work to each thread, without wasting so much resources.
 It is important to remember that in this implementation, there is a little trick
 gathering $\frac{n}{c}$ bodies per thread (n: total bodies, c: total cores).
 
-Another important issue, is that the synchronization is performed by the program
+Another important issue is that the synchronization is performed by the program
 itself, in difference with the pre-compilation process used by OpenMP.
 
 Note that the behavior with a little amount of bodies is very similar,
@@ -108,7 +108,7 @@ with more than 6 cores.
 
 \subsubsection{CUDA assessment}
 
-In the figure~\ref{fig:cuda} we can see the acceleration factor of all
+In figure~\ref{fig:cuda} we can see the acceleration factor of all
 the performed test, using different numbers of bodies.
 
 \begin{figure}[h!t]
@@ -131,7 +131,7 @@ but in each GPU iteration we use a configuration ($\delta$) between the
 \emph{blocks per grid (BpG)} and the \emph{threads per block (TpB)},
 aside of the fixed number of GPU cores.
 
-In the figure~\ref{fig:cuda} we can appreciate
+In figure~\ref{fig:cuda} we can appreciate
 the behavior of the CUDA implementation increasing the amount of bodies,
 obtaining a really good acceleration factor,
 but after the 2000 bodies, it is possible to note
@@ -145,7 +145,7 @@ breaking the initial good scalability.
     \label{fig:all}
 \end{figure}
 
-Finally, as the figure~\ref{fig:all} and the table~\ref{tab:all} shows,
+Finally, as figure~\ref{fig:all} and the table~\ref{tab:all} shows,
 the final review of each technique is very clear.
 
 Understanding the differences between the CPU and GPU
