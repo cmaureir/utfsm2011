@@ -1,0 +1,93 @@
+\begin{frame}
+\frametitle{\emph{n-body} problem}
+    \begin{figure}[t]
+        \centering
+        \includegraphics[width=0.6\textwidth]{img/orion}
+        \caption{Orion}
+    \end{figure}
+\end{frame}
+
+\frame
+{
+\frametitle{\emph{n-body} simulation}
+\framesubtitle{Applications}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/jet}
+    \caption{Fluid Dynamics}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{\emph{n-body} simulation}
+\framesubtitle{Applications}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/bh}
+    \caption{Astrophysics}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{\emph{n-body} simulation}
+\framesubtitle{Applications}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/particle}
+    \caption{Particle Physics}
+\end{figure}
+}
+
+\frame
+{
+\frametitle{\emph{n-body} simulation}
+\framesubtitle{Applications}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/atari}
+    \caption{Video Games Development}
+\end{figure}
+}
+
+
+\frame
+{
+\frametitle{Algorithm}
+\framesubtitle{Critical sections}
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{itemize}
+            \item Initial positions.
+            \begin{itemize}
+                \item \red{Random.}
+            \end{itemize}
+            \item Integration method.
+            \begin{itemize}
+                \item \red{Leapfrog.}
+            \end{itemize}
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \begin{itemize}
+            \item Force calculation.
+            \begin{itemize}
+                \item \red{Particle-Particle.} \blue{$O(n^2)$}
+            \end{itemize}
+        \end{itemize}
+    \end{column}
+\end{columns}
+}
+
+
+\frame
+{
+\frametitle{Algorithm}
+\framesubtitle{Force calculation}
+
+    $$f_{ij} =G \cdot \frac{m_i \cdot m_j}{||r_{ij}||^{2}} \cdot \frac{\vec{r_{ij}}}{||r_ij||},\ \forall i,j \in N | i \neq j$$
+    \begin{itemize}
+        \item $G$, gravitational constant. ($6,67428 \times 10^{-11} m^{3} kg^{-1} s^{-2}$)
+    \end{itemize}
+}
