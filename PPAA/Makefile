@@ -4,9 +4,7 @@ all:
 	rubber -d $(src)
 
 clean:
-	rubber --clean ${src}
+	rubber --pdf --clean ${src}
 
-distclean: clean
-	rm -rf bin/
 x:
-	okular bin/$(src).pdf &> /dev/null &
+	okular $(src).pdf &> /dev/null &
