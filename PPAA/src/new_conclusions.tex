@@ -1,0 +1,50 @@
+The continuous fight in the High Performance Computing field,
+related of which technology is better than other is an important aspect
+of each related work.
+
+There is no a simple solution,
+we cannot say that CPU or GPU is better,
+because all depends of the algorithm structure.
+
+A common analogy between CPU and GPU
+says as: \emph{What's better, a couple of Ferrari's or hundreds of scooters?},
+and well, the answers is the same, ``depends'';
+depends if I want to use the vehicle in a race or if I want to
+start a food delivery service.
+
+In this case,
+the n-body algorithm is a embarrassing parallel problem,
+and studying the characteristics of the algorithm
+is a perfect match for a GPU device,
+due the mapping analogy ``one thread, one bodies'',
+but we tried to ``transform'' the algorithm grain
+to a ``coarse'' approach, to give some CPU advantage.
+
+As suspected,
+the GPU has a big advantage respect the CPU with large
+amount of bodies, but the CPU won only one fight using
+16 bodies.
+
+The speed-up difference between this both implementation
+is very close, approximate 7x, which let us think about
+other important aspect, the prices.
+
+The GPU cost more than 3 times the CPU,
+but in this work, we use two CPU (to obtain 16 threads)
+and 1 GPU, so we have a final difference of 1.5 times
+the CPU price.
+
+In programming terms,
+both approaches need a specialized knowledge,
+and also the code intervention is huge
+in comparison with the OpenMP pragma.
+Furthermore, the current implementations
+are quite simple, unused all the potential of
+each technology, which will produce
+the same conclusions, but maybe with different proofs.
+
+The CPU benchmarks,
+give us the idea that maybe the CPU will improve
+the results, with larges amount of bodies,
+but the last CPU have high prices
+in comparison with the Xeon E5520.

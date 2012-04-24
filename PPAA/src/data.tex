@@ -128,8 +128,25 @@
         \label{tab:cuda}
     \end{table}
 
+\subsection{CUDA and PThreads}
 
-\begin{itemize}
-    \item Graficos de Bodies/nro CPU
-    \item Graficos de Pthreads/CPU con CUDA
-\end{itemize}
+The following plots \ref{fig:pthvscuda1} and \ref{fig:pthvscuda2} show a comparison between the Pthreads and CUDA implementation.
+This approaches implementation are based in two different algoritgm type,
+fine and coarse grained.
+
+The implementations looking for an scenario in which each technology
+is benefited; coarse grain for the CPU and fine grain for the GPU.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/pthvscuda-4096}
+    \caption{Pthreads vs CUDA until 4096 bodies}
+    \label{fig:pthvscuda1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/pthvscuda-128}
+    \caption{Pthreads vs CUDA until 128 bodies}
+    \label{fig:pthvscuda2}
+\end{figure}
